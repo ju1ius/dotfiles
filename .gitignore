@@ -1,0 +1,13 @@
+*~
+*.swp
+*.old
+*.bak
+
+/vim/plugged/*
+!/vim/plugged
+/vim/backup/*
+!/vim/backup
+/vim/swap/*
+!/vim/swap
+/vim/.netrwhist
+
