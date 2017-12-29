@@ -1,21 +1,21 @@
 - defaults:
-  link:
-    create: true
-    relink: true
+    link:
+      create: true
+      relink: true
 
 - clean:
-  - '~'
-  - ~/.config
+    - '~'
+    - ~/.config
 
 - link:
-  ~/.dotfiles: ''
-  ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
-  ~/.bashrc: bash/bashrc
-  ~/.tmux.conf: tmux/tmux.conf
-  ~/.vim: vim
-  ~/.vimrc: vim/vimrc
-  ~/.config/terminator: terminator
-  ~/.fonts.conf: fontconfig/fonts.conf
+    ~/.dotfiles: ''
+    ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
+    ~/.bashrc: bash/bashrc
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.vim: vim
+    ~/.vimrc: vim/vimrc
+    ~/.config/terminator: terminator
+    ~/.fonts.conf.d/99-vscode.conf: fontconfig/99-vscode.conf
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
