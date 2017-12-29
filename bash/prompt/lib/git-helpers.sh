@@ -1,6 +1,6 @@
 
 __git_is_repo() {
-  if [[ -n "$(git rev-parse --is-inside-work-tree 2> /dev/null)" ]]
+  if [[ -n "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]]
   then
     return 0
   fi
@@ -8,7 +8,7 @@ __git_is_repo() {
 }
 
 __git_is_dirty() {
-  if [[ $(git diff --shortstat 2> /dev/null | tail -n1) ]];
+  if [[ $(git diff --shortstat 2>/dev/null | tail -n1) ]];
   then
     return 0
   fi
