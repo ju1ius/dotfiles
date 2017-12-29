@@ -111,8 +111,6 @@ _set_prompt() {
     prompt_last_error="\[${bg[red]}${fg[black]}\] $error_code \[$nocolor\]"
   fi
 
-  local rhs="$(git_prompt)"
-
   PS1="${PROMPT_USER}${PROMPT_HOST}"
   PS1+="$(_get_cwd)"
   PS1+="$(git_prompt)"

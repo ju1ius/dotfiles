@@ -24,15 +24,20 @@ _git_branch() {
 }
 
 git_prompt() {
-  if ! __git_is_repo; then return 1;fi
+  if ! __git_is_repo
+  then
+    return 1
+  fi
 
   local prompt=""
   local bgcolor="${bg[green]}"
   local fgcolor="${fg[black]}"
 
-  __git_is_dirty
-  local -i is_dirty=$?
-  [[ is_dirty ]] && bgcolor="${bg[red]}"
+  if __git_is_dirty
+  then
+    bgcolor="${bg[red]}"
+  fi
+
   prompt+="$(_git_branch)"
 
   echo -ne "${bgcolor}${fgcolor} ${prompt} ${nocolor}"
