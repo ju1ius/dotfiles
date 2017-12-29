@@ -43,7 +43,7 @@ fi
 if [[ "$color_prompt" = yes && -f ~/.dotfiles/bash/prompt.sh ]]
 then
   # We have a custom prompt, use it
-  source ~/.dotfiles/bash/promt.sh
+  source ~/.dotfiles/bash/prompt.sh
 else
   # Use default debian prompt
 
