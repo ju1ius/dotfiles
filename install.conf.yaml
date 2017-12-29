@@ -8,6 +8,7 @@
   - ~/.config
 
 - link:
+  ~/.dotfiles: ''
   ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
   ~/.bashrc: bash/bashrc
   ~/.tmux.conf: tmux/tmux.conf
