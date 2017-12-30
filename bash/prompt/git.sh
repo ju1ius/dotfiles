@@ -29,7 +29,7 @@ git_prompt() {
     return 1
   fi
 
-  local prompt=""
+  local prompt="⎇ "
   local bgcolor="${bg[green]}"
   local fgcolor="${fg[black]}"
 
