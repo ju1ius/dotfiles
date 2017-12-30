@@ -38,26 +38,7 @@ __git_status() {
   git status --porcelain 2>/dev/null
 }
 
-__git_status_counts() {
-  __git_status | awk '
-  BEGIN {
-    untracked=0;
-    unstaged=0;
-    staged=0;
-  }
-  {
-    if ($0 ~ /^\?\? .+/) {
-      untracked += 1
-    } else {
-      if ($0 ~ /^.[^ ] .+/) {
-        unstaged += 1
-      }
-      if ($0 ~ /^[^ ]. .+/) {
-        staged += 1
-      }
-    }
-  }
-  END {
-    print untracked "\t" unstaged "\t" staged
-  }'
+__git_full_status() {
+  local parser="$(dirname "${BASH_SOURCE[0]}")/git-parse-status.awk"
+  git status --porcelain=2 --branch 2>/dev/null | "$parser"
 }
