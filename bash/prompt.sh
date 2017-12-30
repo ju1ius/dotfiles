@@ -11,6 +11,10 @@
 __FILE__="${BASH_SOURCE[0]}"
 __DIR__="$(dirname "$__FILE__")"
 
+##########
+# Colors
+##########
+
 declare -A fg=(
   ['black']="$(tput setaf 0)"
   ['red']="$(tput setaf 1)"
@@ -76,23 +80,19 @@ PROMPT_SHORTEN_PATH=${PROMPT_SHORTEN_PATH:-1}
 PROMPT_PATH_MAXLEN=${PROMPT_PATH_MAXLEN:-50}
 # nunmber of directories to keep at start of PWD
 PROMPT_PATH_KEEP=${PROMPT_PATH_KEEP:-2}
+# enables detailed git status
+PROMPT_ENABLE_GIT_STATUS=${PROMPT_ENABLE_GIT_STATUS:-1}
+
+##########
+# Backup
+##########
+declare -A PROMPT_OLD_SHOPT
 
 # Escape the given strings
 # Must be used for all strings injected in PS1 that may comes from remote sources,
 # like $PWD, VCS branch names...
 _prompt_escape() {
   echo -nE "${1//\\/\\\\}"
-}
-
-_strip_ansi_commands() {
-  sed -e "s/\x1B\[[0-9;]*[a-zA-Z]//g" -e 's/\\[][]]//g' <<<"$1"
-}
-
-_align_right() {
-  local rhs="$1"
-  local stripped="$(_strip_ansi_commands "$rhs")"
-  local -i cols=$(tput cols)
-  echo -ne "\[$(tput sc)$(tput cuf $cols)$(tput cub ${#stripped})\]${rhs}\[$(tput rc)\]"
 }
 
 # source components
@@ -115,6 +115,7 @@ _set_prompt() {
   PS1+="$(_get_cwd)"
   PS1+="$(git_prompt)"
   PS1+="\n${prompt_last_error}"
+  PS1+="\[${style[inv]}\] ❱ "
 }
 
 prompt_on() {
@@ -123,16 +124,25 @@ prompt_on() {
   then
     PROMPT_OLD_PS1="$PS1"
     PROMPT_OLD_PROMPT_CMD="$PROMPT_COMMAND"
-    PROMPT_OLD_SHOPT="$(shopt -p promptvars)"
+    PROMPT_OLD_SHOPT=(
+      ['promptvars']="$(shopt -p promptvars)"
+    )
   fi
   # Disable parameter/command expansion from PS1
   shopt -u promptvars
+  # Trap the debug signal to reset colors after entering a command
+  trap 'tput sgr0' DEBUG
+  # Set the prompt command
   PROMPT_COMMAND=_set_prompt
 }
 
 prompt_off() {
   PS1="$PROMPT_OLD_PS1"
-  eval "$PROMPT_OLD_SHOPT"
+  for opt in "${!PROMPT_OLD_SHOPT[@]}"
+  do
+    eval "${PROMPT_OLD_SHOPT[$opt]}"
+  done
+  trap - DEBUG
   PROMPT_COMMAND="$PROMPT_OLD_PROMPT_CMD"
 }
 
