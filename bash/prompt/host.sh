@@ -37,24 +37,21 @@ get_host_prompt() {
 
   case "$connection_type" in
     ssh)
-      prompt_host="${colors[host_ssh]}${prompt_host}${nocolor}"
+      prompt_host="${colors[host_ssh]}${prompt_host}"
     ;;
     su)
-      prompt_host="${colors[host_su]}${prompt_host}${nocolor}"
+      prompt_host="${colors[host_su]}${prompt_host}"
     ;;
     telnet)
-      prompt_host="${colors[host_telnet]}${prompt_host}${nocolor}"
+      prompt_host="${colors[host_telnet]}${prompt_host}"
     ;;
     *)
       if [[ -n "$prompt_host" ]]; then
-        prompt_host="${colors[host_default]}${prompt_host}${nocolor}"
+        prompt_host="${colors[host_default]}${prompt_host}"
       fi
     ;;
   esac
-  if [[ -n "$prompt_host" ]]
-  then
-    prompt_host+=" "
-  fi
+
   echo -ne "$prompt_host"
 }
 

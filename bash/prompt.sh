@@ -61,12 +61,12 @@ declare -A style=(
 )
 
 declare -A colors=(
-  ['user_root']="${bg[black2]}${fg[red]}"
-  ['user_nologin']="${bg[black2]}${fg[yellow]}"
-  ['host_ssh']="${bg[black2]}${fg[magenta]}"
-  ['host_su']="${bg[black2]}${fg[yellow]}"
-  ['host_telnet']="${bg[black2]}${fg[red]}"
-  ['host_default']="${bg[black2]}${fg[white]}"
+  ['user_root']="${fg[red]}"
+  ['user_nologin']="${fg[yellow]}"
+  ['host_ssh']="${fg[magenta]}"
+  ['host_su']="${fg[yellow]}"
+  ['host_telnet']="${fg[red]}"
+  ['host_default']="${fg[white]}"
   ['cwd']="${bg[black2]}${fg[white]}"
 )
 
@@ -111,7 +111,12 @@ _set_prompt() {
     prompt_last_error="\[${bg[red]}${fg[black]}\] $error_code \[$nocolor\]"
   fi
 
-  PS1="${PROMPT_USER}${PROMPT_HOST}"
+  local conn_str="${PROMPT_USER}${PROMPT_HOST}"
+  if [[ -n "$conn_str" ]]; then
+    conn_str="${bg[black2]} ${conn_str} ${nocolor}"
+  fi
+
+  PS1="${conn_str}"
   PS1+="$(_get_cwd)"
   PS1+="$(git_prompt)"
   PS1+="\n${prompt_last_error}"
