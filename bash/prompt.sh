@@ -120,7 +120,9 @@ _set_prompt() {
   PS1+="$(_get_cwd)"
   PS1+="$(git_prompt)"
   PS1+="\n${prompt_last_error}"
-  PS1+="\[${style[inv]}\] ❱ "
+  PS1+=" ❱ "
+
+  PS2=" ❱❱ "
 }
 
 prompt_on() {
