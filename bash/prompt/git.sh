@@ -56,7 +56,7 @@ git_prompt() {
       upstream_status+="↓${behind}"
     fi
     if [[ -n "$upstream_status" ]]; then
-      details+=" ${upstream_status} "
+      details+=" ${upstream_status}"
     fi
 
     local counts=""
