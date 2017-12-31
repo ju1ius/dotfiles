@@ -37,8 +37,3 @@ __git_ref() {
 __git_status() {
   git status --porcelain 2>/dev/null
 }
-
-__git_full_status() {
-  local parser="$(dirname "${BASH_SOURCE[0]}")/git-parse-status.awk"
-  git status --porcelain=2 --branch 2>/dev/null | "$parser"
-}

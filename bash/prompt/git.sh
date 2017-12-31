@@ -1,31 +1,17 @@
 #!/bin/bash
 
-source "$(dirname "${BASH_SOURCE[0]}")/lib/git-helpers.sh"
-
-_git_branch() {
-  local -i detached=1
-  local branch=""
-  if __git_branch &>/dev/null
-  then
-    branch="$(__git_ref)"
-  else
-    detached=0
-    local prefix=""
-    if __git_tag &>/dev/null
-    then
-      prefix="tag:"
-    else
-      prefix="detached:"
-    fi
-    branch="${prefix}$(__git_ref)"
+git_prompt() {
+  local status="$(git status --porcelain=2 --branch 2>/dev/null)"
+  if [[ -z "$status" ]]; then
+    # Probably not inside a repo
+    return 1
   fi
 
-  echo -ne "${branch}"
-}
+  local parser="${BASH_SOURCE[0]%/*}/lib/git-parse-status.awk"
+  local bgcolor="${bg[green]}"
+  local fgcolor="${fg[black]}"
 
-_git_status() {
-  local output=""
-  declare -a fields=($(__git_full_status))
+  declare -a fields=($("$parser" <<<"$status"))
   local oid="${fields[0]}"
   local branch="${fields[1]}"
   local -i ahead="${fields[3]}"
@@ -36,6 +22,18 @@ _git_status() {
   #TODO: set merge-conflict color if unmerged paths are present
   local -i unmerged="${fields[8]}"
 
+  # ----- Get the status background color:
+  # clean: green
+  # merge conflicts: magenta
+  # dirty: red
+  if (( unmerged > 0 )); then
+    bgcolor="${bg[magenta]}"
+  elif (( staged > 0 || unstaged > 0 || untracked > 0 )); then
+    bgcolor="${bg[red]}"
+  fi
+
+  # ----- Get the branch display name
+
   if [[ "$oid" = "(initial)" ]]; then
     oid="initial"
   else
@@ -45,58 +43,40 @@ _git_status() {
   if [[ "$branch" = "(detached)" ]]; then
     branch="detached($oid)"
   fi
-  output+="$branch"
 
-  local upstream_status=""
+  # ----- Status details
 
-  if (( ahead > 0 )); then
-    upstream_status+="↑${ahead}"
-  fi
-  if (( behind > 0 )); then
-    upstream_status+="↓${behind}"
-  fi
-  if [[ -n "$upstream_status" ]]; then
-    output+=" $upstream_status"
+  local details=""
+  if (( PROMPT_ENABLE_GIT_FULLSTATUS == 1 )); then
+    local upstream_status=""
+    if (( ahead > 0 )); then
+      upstream_status+="↑${ahead}"
+    fi
+    if (( behind > 0 )); then
+      upstream_status+="↓${behind}"
+    fi
+    if [[ -n "$upstream_status" ]]; then
+      details+=" ${upstream_status} "
+    fi
+
+    local counts=""
+    if ((staged > 0)); then
+      counts+="s${staged}"
+    fi
+    if ((unstaged > 0)); then
+      counts+="u${unstaged}"
+    fi
+    if ((untracked > 0)); then
+      counts+="?${untracked}"
+    fi
+    if ((unmerged > 0)); then
+      counts+="!${unmerged}"
+    fi
+    if [[ -n "$counts" ]]; then
+      details+=" $counts"
+    fi
   fi
 
-  local status=""
-
-  if ((staged > 0)); then
-    status+="s:${staged}"
-  fi
-  if ((unstaged > 0)); then
-    status+="u:${staged}"
-  fi
-  if ((untracked > 0)); then
-    status+="?${untracked}"
-  fi
-  if [[ -n "$status" ]]; then
-    output+=" $status"
-  fi
-
-  echo -ne "$output"
+  echo -ne "${bgcolor}${fgcolor} ⎇ ${branch}${details} ${nocolor}"
 }
 
-git_prompt() {
-  if ! __git_is_repo
-  then
-    return 1
-  fi
-
-  local prompt="⎇ "
-  local bgcolor="${bg[green]}"
-  local fgcolor="${fg[black]}"
-
-  if __git_is_dirty
-  then
-    bgcolor="${bg[red]}"
-  fi
-
-  if (( PROMPT_ENABLE_GIT_STATUS == 1 )); then
-    prompt+="$(_git_status)"
-  else
-    prompt+="$(_git_branch)"
-  fi
-
-  echo -ne "${bgcolor}${fgcolor} ${prompt} ${nocolor}"
-}
