@@ -114,6 +114,9 @@ fi
 if [[ -d "$HOME/bin" ]]; then
   PATH="$HOME/bin:$PATH"
 fi
+if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
+  PATH="$PATH:$HOME/.config/composer/vendor/bin"
+fi
 if [[ -f ~/.fzf.bash ]]; then
   source ~/.fzf.bash
 fi
