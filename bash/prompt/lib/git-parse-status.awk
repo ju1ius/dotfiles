@@ -1,4 +1,4 @@
-#!/usr/bin/awk -f
+#!/usr/bin/gawk -f
 
 # Parses the output of git status --porcelain=2 --branch
 # https://git-scm.com/docs/git-status
