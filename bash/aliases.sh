@@ -1,3 +1,4 @@
+alias sudo="sudo -E"
 ##########
 # Git
 ##########
