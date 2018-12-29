@@ -2,7 +2,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf',  {'dir': '~/bin/fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
@@ -150,8 +150,9 @@ let g:lightline.active = {
 \}
 
 " NERDTree
-map <leader>t :NERDTreeToggle<CR>
-map <leader>T :NERDTree %<CR>
+let NERDTreeMinimalUI = 1
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <silent> <leader>T :NERDTreeFind<CR>
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<c-j>"
