@@ -20,7 +20,7 @@
     background_darkness = 0.91
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = Menlo 10
+    font = Fira Code Medium 11
     foreground_color = "#abb2bf"
     palette = "#282c34:#e06c75:#98c379:#e5c07b:#61afef:#c678dd:#56b6c2:#abb2bf:#3e4452:#be5046:#98c379:#d19a66:#61afef:#c678dd:#56b6c2:#5c6370"
     show_titlebar = False
