@@ -54,11 +54,14 @@ set backupdir=~/.vim/backup//,.
 
 let mapleader=";"
 set guioptions=aegimrLt
-set guifont=Menlo\ 11
+set guifont=Fira\ Code\ 11
 set mouse=a
 if version >= 800
   set belloff=all
 endif
+
+" make search case-insensitive unless uppercase characters are entered
+set smartcase
 
 " Line numbering
 set number relativenumber
@@ -82,7 +85,7 @@ set expandtab
 set shiftwidth=2 softtabstop=2
 augroup ftTabSizes
   autocmd!
-  autocmd FileType php,python,c setlocal shiftwidth=4 softtabstop=4
+  autocmd FileType php,python setlocal shiftwidth=4 softtabstop=4
 augroup END
 
 noremap <leader>y "+y
