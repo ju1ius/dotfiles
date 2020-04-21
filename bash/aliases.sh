@@ -1,4 +1,5 @@
 alias sudo="sudo -E"
+alias ll="ls -lah"
 ##########
 # Git
 ##########
