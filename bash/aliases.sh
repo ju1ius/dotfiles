@@ -11,5 +11,7 @@ alias gl="git log --oneline --decorate --graph"
 # https://gist.github.com/RichardBronosky/9af3b9796d7423cd0e8e1d419fcea9fc
 alias git-serve="git daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/"
 
+alias dcmp="docker-compose"
+
 # Enable XDebug from command-line
 alias php-debug="php -e -d zend_extension=xdebug.so"
