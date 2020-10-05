@@ -4,10 +4,10 @@
 *.bak
 
 /vim/plugged/*
-!/vim/plugged
+!/vim/plugged/.gitkeep
 /vim/backup/*
-!/vim/backup
+!/vim/backup/.gitkeep
 /vim/swap/*
-!/vim/swap
+!/vim/swap/.gitkeep
 /vim/.netrwhist
 
