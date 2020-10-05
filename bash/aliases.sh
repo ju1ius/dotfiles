@@ -20,3 +20,7 @@ alias dcl="docker-compose logs"
 
 # Enable XDebug from command-line
 alias php-debug="php -e -d zend_extension=xdebug.so"
+
+# aliases for the kitty terminal emulator
+alias kitcat="kitty +kitten icat"
+alias kiff="kitty +kitten diff"
