@@ -15,6 +15,7 @@
   ~/.vim: vim
   ~/.vimrc: vim/vimrc
   ~/.config/nvim/init.vim: neovim/init.vim
+  ~/.npmrc: node/npmrc
   ~/.fonts.conf.d/99-vscode.conf: fontconfig/99-vscode.conf
 
 - shell:

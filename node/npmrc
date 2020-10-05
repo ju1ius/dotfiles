@@ -1,0 +1,4 @@
+prefix=${HOME}/.local
+
+yoga-layout:platform=standalone
+
