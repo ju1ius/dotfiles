@@ -9,8 +9,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf',  {'dir': '~/bin/fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 
@@ -25,7 +25,6 @@ Plug 'tpope/vim-surround'
 Plug 'gorkunov/smartpairs.vim'
 
 " ----- Colors
-Plug 'altercation/vim-colors-solarized'
 Plug 'joshdick/onedark.vim'
 
 " ----- Statusline
@@ -52,6 +51,8 @@ endif
 Plug 'mattn/emmet-vim'
 
 "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
