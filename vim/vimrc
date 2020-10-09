@@ -5,7 +5,7 @@ set hidden
 set directory=~/.vim/swap//,.
 set backupdir=~/.vim/backup//,.
 
-let mapleader=";"
+let mapleader="\<Space>"
 set guioptions=aegimrLt
 set guifont=Fira\ Code\ 11
 set mouse=a
