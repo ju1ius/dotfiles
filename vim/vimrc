@@ -11,6 +11,7 @@ else
   source ~/.vim/config/plugins/nerdtree.vim
   source ~/.vim/config/plugins/ultisnips.vim
   source ~/.vim/config/plugins/ack.vim
+  source ~/.vim/config/plugins/fzf.vim
   source ~/.vim/config/plugins/ale.vim
 endif
 

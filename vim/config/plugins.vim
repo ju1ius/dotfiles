@@ -15,9 +15,10 @@ if exists('g:vscode')
 else
 
   Plug 'tpope/vim-commentary'
-  Plug 'preservim/nerdtree'
-  Plug 'junegunn/fzf',  {'dir': '~/bin/fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim'
+  Plug 'scrooloose/nerdtree'
   Plug 'mileszs/ack.vim'
+  Plug 'junegunn/fzf',  {'dir': '~/bin/fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim'
+  Plug 'airblade/vim-rooter'
 
   Plug 'christoomey/vim-system-copy'
   " ------- Pairs
