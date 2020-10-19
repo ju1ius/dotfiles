@@ -1,5 +1,5 @@
 
-__git_is_repo() {
+_prompt.git.is_repo() {
   if [[ -n "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]]
   then
     return 0
@@ -7,7 +7,7 @@ __git_is_repo() {
   return 1
 }
 
-__git_is_dirty() {
+_prompt.git.is_dirty() {
   if [[ $(git diff --shortstat 2>/dev/null | tail -n1) ]];
   then
     return 0
@@ -19,21 +19,21 @@ __git_is_dirty() {
 # but this can be different when two branches are pointing to the
 # same commit. _git_branch is used to explicitly choose the checked-out
 # branch.
-__git_branch() {
+_prompt.git.branch() {
   git symbolic-ref -q --short HEAD 2> /dev/null || return 1
 }
-__git_tag() {
+_prompt.git.tag() {
   git describe --tags --exact-match 2> /dev/null
 }
-__git_commit_desc() {
+_prompt.git.commit_desc() {
   git describe --contains --all 2> /dev/null
 }
-__git_short_sha() {
+_prompt.git.short_sha() {
   git rev-parse --short HEAD
 }
-__git_ref() {
-  __git_branch || __git_tag || __git_commit_desc || __git_short_sha
+_prompt.git.ref() {
+  _prompt.git.branch || _prompt.git.tag || _prompt.git.commit_desc || _prompt.git.short_sha
 }
-__git_status() {
+_prompt.git.status() {
   git status --porcelain 2>/dev/null
 }

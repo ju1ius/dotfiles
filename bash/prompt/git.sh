@@ -1,15 +1,15 @@
 #!/bin/bash
 
-git_prompt() {
+_prompt.git() {
   local status="$(git status --porcelain=2 --branch 2>/dev/null)"
   if [[ -z "$status" ]]; then
     # Probably not inside a repo
+    PROMPT_REPLY[content]=''
     return 1
   fi
 
   local parser="${BASH_SOURCE[0]%/*}/lib/git-parse-status.awk"
-  local bgcolor="${bg[green]}"
-  local fgcolor="${fg[black]}"
+  local color="git_clean"
 
   declare -a fields=($("$parser" <<<"$status"))
   local oid="${fields[0]}"
@@ -27,9 +27,9 @@ git_prompt() {
   # merge conflicts: magenta
   # dirty: red
   if (( unmerged > 0 )); then
-    bgcolor="${bg[magenta]}"
+    color="git_conflict"
   elif (( staged > 0 || unstaged > 0 || untracked > 0 )); then
-    bgcolor="${bg[red]}"
+    color="git_dirty"
   fi
 
   # ----- Get the branch display name
@@ -77,6 +77,12 @@ git_prompt() {
     fi
   fi
 
-  echo -ne "${bgcolor}${fgcolor} ⎇ ${branch}${details} ${nocolor}"
+  local branch_icon="⎇"
+  if (( PROMPT_USE_NERDFONT )); then
+    branch_icon=""
+  fi
+
+  PROMPT_REPLY[color]="${color}"
+  printf -v PROMPT_REPLY[content] '%s %s%s' "${branch_icon}" "${branch}" "${details}"
 }
 

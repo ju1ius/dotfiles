@@ -1,15 +1,15 @@
-_cwd_truncate_left() {
+_prompt.cwd.truncate_left() {
   local -i max_len="$1"
   local cwd="$2"
   local ellipsis="${3:-…}"
   # show at least complete current directory
-  local ret="${cwd##*/}"
+  local d="${cwd##*/}"
   # cut out the leaf directory
-  local p="${cwd:0:${#cwd} - ${#ret}}"
-  echo -ne "${ellipsis}${p:${#p} - ($max_len - ${#ret} - ${#ellipsis})}${ret}"
+  local p="${cwd:0:${#cwd} - ${#d}}"
+  printf '%s%s%s' "${ellipsis}" "${p:${#p} - ($max_len - ${#d} - ${#ellipsis})}" "${d}"
 }
 
-_shorten_path() {
+_prompt.cwd.shorten_path() {
   local -i max_len="$1"
   local -i keep_dirs="$2"
   local p="$3"
@@ -40,14 +40,15 @@ _shorten_path() {
     ret+="${ellipsis}${p:${#p} - $len_left}${base}"
   fi
 
-  echo -ne "$ret"
+  printf '%s' "${ret}"
 }
 
 
-_get_cwd() {
+_prompt.pwd() {
+  PROMPT_REPLY[color]='cwd'
   if (( ! PROMPT_SHORTEN_PATH ))
   then
-    echo "\[${colors[cwd]}\] \w \[${nocolor}\]"
+    PROMPT_REPLY[content]='\w'
     return 0
   fi
 
@@ -60,11 +61,10 @@ _get_cwd() {
     prompt_cwd="$cwd"
   elif (( PROMPT_PATH_KEEP == 0 ))
   then
-    prompt_cwd="$(_cwd_truncate_left $max_len $cwd)"
+    prompt_cwd="$(_prompt.cwd.truncate_left $max_len $cwd)"
   else
-    prompt_cwd="$(_shorten_path $max_len $PROMPT_PATH_KEEP $cwd)"
+    prompt_cwd="$(_prompt.cwd.shorten_path $max_len $PROMPT_PATH_KEEP $cwd)"
   fi
 
-  prompt_cwd="$(_prompt_escape "$prompt_cwd")"
-  echo "\[${colors[cwd]}\] $prompt_cwd \[${nocolor}\]"
+  PROMPT_REPLY[content]="$prompt_cwd"
 }
