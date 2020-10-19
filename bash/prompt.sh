@@ -86,7 +86,7 @@ declare -A colors=(
 # whether to shorten PWD
 PROMPT_SHORTEN_PATH=${PROMPT_SHORTEN_PATH:-1}
 # max percentage of the screen taken by PWD
-PROMPT_PATH_MAXLEN=${PROMPT_PATH_MAXLEN:-50}
+PROMPT_PATH_MAXLEN=${PROMPT_PATH_MAXLEN:-66}
 # nunmber of directories to keep at start of PWD
 PROMPT_PATH_KEEP=${PROMPT_PATH_KEEP:-2}
 # enables detailed git status
@@ -94,6 +94,8 @@ PROMPT_ENABLE_GIT_FULLSTATUS=${PROMPT_ENABLE_GIT_FULLSTATUS:-1}
 # enable nerd fonts
 PROMPT_USE_NERDFONT=${PROMPT_USE_NERDFONT:-0}
 PROMPT_NERDFONT_SEP=''
+# PROMPT_NERDFONT_SEP=''
+# PROMPT_NERDFONT_SEP=''
 
 ##########
 # Backup
