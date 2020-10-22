@@ -209,7 +209,7 @@ prompt.on() {
   # Disable parameter/command expansion from PS1
   shopt -u promptvars
   # Trap the debug signal to reset colors after entering a command
-  trap 'tput sgr0' DEBUG
+  # trap 'tput sgr0' DEBUG
   # Set the prompt command
   PROMPT_COMMAND=_prompt.set_prompt
 }
@@ -221,7 +221,7 @@ prompt.off() {
   do
     eval "${PROMPT_OLD_SHOPT[$opt]}"
   done
-  trap - DEBUG
+  # trap - DEBUG
   PROMPT_COMMAND="$PROMPT_OLD_PROMPT_CMD"
 }
 
