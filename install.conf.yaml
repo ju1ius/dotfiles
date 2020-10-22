@@ -16,6 +16,7 @@
   ~/.vimrc: vim/init.vim
   ~/.config/nvim/init.vim: neovim/init.vim
   ~/.config/nvim/coc-settings.json: vim/coc-settings.json
+  ~/.config/VSCodium/User/settings.json: vscode/settings.json
   ~/.npmrc: node/npmrc
   ~/.fonts.conf.d/99-vscode.conf: fontconfig/99-vscode.conf
 
