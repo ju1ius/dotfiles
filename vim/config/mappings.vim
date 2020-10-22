@@ -1,9 +1,13 @@
 let mapleader="\<Space>"
+let maplocalleader=";"
 nnoremap <Space> <Nop>
 
 " yank & paste to clipboard
 noremap <leader>y "+y
+noremap <leader>yy "+yy
 noremap <leader>p "+p
+noremap <leader>P "+P
+
 " insert line after/before in normal mode
 noremap <Enter> o<ESC>k
 noremap <S-Enter> O<ESC>j

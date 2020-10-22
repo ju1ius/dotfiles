@@ -9,12 +9,14 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 if exists('g:vscode')
   Plug 'asvetliakov/vim-easymotion'
 else
 
+  Plug 'liuchengxu/vim-which-key'
   Plug 'tpope/vim-commentary'
   Plug 'scrooloose/nerdtree'
   Plug 'mileszs/ack.vim'
@@ -55,7 +57,7 @@ else
   Plug 'mattn/emmet-vim'
 
   "Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-
+  " Utils
   Plug 'ryanoasis/vim-devicons'
 
 endif

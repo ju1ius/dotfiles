@@ -14,6 +14,7 @@ else
   source ~/.vim/config/plugins/fzf.vim
   source ~/.vim/config/plugins/ale.vim
   source ~/.vim/config/plugins/coc.vim
+  source ~/.vim/config/plugins/which-key.vim
 endif
 
 " Emmet

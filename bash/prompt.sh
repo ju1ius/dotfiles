@@ -111,11 +111,11 @@ _prompt.escape() {
 }
 
 # source components
-source ${__DIR__}/prompt/login.sh
-source ${__DIR__}/prompt/pwd.sh
-source ${__DIR__}/prompt/exit-status.sh
-source ${__DIR__}/prompt/git.sh
-source ${__DIR__}/prompt/text.sh
+source "${__DIR__}/prompt/login.sh"
+source "${__DIR__}/prompt/pwd.sh"
+source "${__DIR__}/prompt/exit-status.sh"
+source "${__DIR__}/prompt/git.sh"
+source "${__DIR__}/prompt/text.sh"
 
 
 # The login part is not supposed to change so we run it just once
