@@ -13,8 +13,9 @@
   ~/.bashrc: bash/bashrc
   ~/.tmux.conf: tmux/tmux.conf
   ~/.vim: vim
-  ~/.vimrc: vim/vimrc
+  ~/.vimrc: vim/init.vim
   ~/.config/nvim/init.vim: neovim/init.vim
+  ~/.config/nvim/coc-settings.json: vim/coc-settings.json
   ~/.npmrc: node/npmrc
   ~/.fonts.conf.d/99-vscode.conf: fontconfig/99-vscode.conf
 

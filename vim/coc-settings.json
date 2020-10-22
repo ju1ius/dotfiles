@@ -1,0 +1,22 @@
+{
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings": {
+    "i": false, "d": false, "D": false, "c": false, "x": false, "y": false, "Y": false,
+    "cd": "cd",
+    "<cr>": [
+      "expandable?",
+      ["expanded?", "collapse", "expand"],
+      "open"
+    ],
+    "e": ["expanded?", "collapse:recursive", "expand:recursive"],
+    "v": "open:vsplit",
+    "df": "delete",
+    "dF": "deleteForever",
+    "yy": "copyFile",
+    "dd": "cutFile",
+    "yp": "copyFilepath",
+    "yn": "copyFilename"
+  }
+}

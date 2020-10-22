@@ -9,6 +9,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 
 if exists('g:vscode')
   Plug 'asvetliakov/vim-easymotion'
@@ -24,8 +25,6 @@ else
   " ------- Pairs
   " Auto closes pairs (see also the lexima plugin for an alternative)
   Plug 'jiangmiao/auto-pairs'
-  " Surround with Pairs
-  Plug 'tpope/vim-surround'
   " Smart selection inside pairs (vv, then v to expand or Ctrl+Shift+v to reduce)
   Plug 'gorkunov/smartpairs.vim'
 
@@ -47,6 +46,7 @@ else
   if has('nvim') || version >= 800
     Plug 'w0rp/ale'
     Plug 'maximbaz/lightline-ale'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
 
   if has('python3')
