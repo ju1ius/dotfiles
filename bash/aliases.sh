@@ -4,6 +4,7 @@ alias ll="ls -lah"
 # Git
 ##########
 alias gl="git log --oneline --decorate --graph"
+alias lg="lazygit"
 # Runs a one off git server from the current repository
 # Then other can: `git clone git://your.ip.addr/ repo-name`
 # or git pull `git://your.ip.addr/ branchname` to do a fetch and merge at once
