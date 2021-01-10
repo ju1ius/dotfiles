@@ -9,7 +9,7 @@ _prompt.git() {
 }
 
 _prompt.git_short() {
-  local branch="$(git branch --show-current)"
+  local branch="$(git branch --show-current 2>/dev/null)"
   if [[ -z "$branch" ]]; then
     # Probably not inside a repo
     PROMPT_REPLY[content]=''
