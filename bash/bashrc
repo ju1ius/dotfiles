@@ -139,6 +139,10 @@ if [[ -d "$HOME/.poetry" ]]; then
   PATH="$HOME/.poetry/bin:$PATH"
 fi
 
+if [[ -e "$HOME/.local/bin/deno" ]]; then
+  DENO_INSTALL="$HOME/.local"
+fi
+
 # fzf
 if [[ -f ~/.fzf.bash ]]; then
   source ~/.fzf.bash
