@@ -1,6 +1,36 @@
 #!/bin/bash
 
 _prompt.git() {
+  if (( PROMPT_ENABLE_GIT_FULLSTATUS == 1 )); then
+    _prompt.git_full
+  else
+    _prompt.git_short
+  fi
+}
+
+_prompt.git_short() {
+  local branch="$(git branch --show-current)"
+  if [[ -z "$branch" ]]; then
+    # Probably not inside a repo
+    PROMPT_REPLY[content]=''
+    return 1
+  fi
+  local color="git_clean"
+  if ! git diff --quiet; then
+    color="git_dirty"
+  fi
+
+  local branch_icon="⎇"
+  if (( PROMPT_USE_NERDFONT )); then
+    branch_icon=""
+  fi
+
+  PROMPT_REPLY[color]="${color}"
+  printf -v PROMPT_REPLY[content] '%s %s' "${branch_icon}" "${branch}"
+}
+
+
+_prompt.git_full() {
   local status="$(git status --porcelain=2 --branch 2>/dev/null)"
   if [[ -z "$status" ]]; then
     # Probably not inside a repo
