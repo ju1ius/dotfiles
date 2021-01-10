@@ -1,6 +1,6 @@
 {
   "editor.tabSize": 2,
-  "editor.fontFamily": "'Fira Code Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.fontFamily": "'FiraCode Nerd Font Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
@@ -30,4 +30,15 @@
   "python.languageServer": "Microsoft",
   "shellcheck.executablePath": "/usr/bin/shellcheck",
   "shellcheck.useWorkspaceRootAsCwd": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "window.zoomLevel": 0,
+  "json.format.enable": false,
+  "editor.formatOnSaveMode": "modifications",
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
 }
