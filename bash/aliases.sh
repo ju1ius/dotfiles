@@ -14,6 +14,7 @@ alias git-serve="git daemon --verbose --export-all --base-path=.git --reuseaddr 
 
 # docker-compose
 alias dc="docker-compose"
+alias dcb="COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build"
 alias dcx="docker-compose exec"
 alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
