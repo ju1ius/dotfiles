@@ -35,17 +35,19 @@ set splitright
 " ========== text management ==========
 
 " make search case-insensitive unless uppercase characters are entered
+set ignorecase
 set smartcase
 " make search incremental
 set incsearch
 
 " Line numbering
-set number relativenumber
-augroup numberToggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+set number
+" set relativenumber
+" augroup numberToggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END
 
 " Line wrapping
 set nowrap

@@ -4,18 +4,14 @@ source ~/.vim/config/general.vim
 source ~/.vim/config/mappings.vim
 
 " plugin configs
-if exists('g:vscode')
-  source ~/.vim/config/vscode.vim
-else
-  source ~/.vim/config/plugins/lightline.vim
-  source ~/.vim/config/plugins/nerdtree.vim
-  source ~/.vim/config/plugins/ultisnips.vim
-  source ~/.vim/config/plugins/ack.vim
-  source ~/.vim/config/plugins/fzf.vim
-  source ~/.vim/config/plugins/ale.vim
-  source ~/.vim/config/plugins/coc.vim
-  source ~/.vim/config/plugins/which-key.vim
-endif
+source ~/.vim/config/plugins/lightline.vim
+source ~/.vim/config/plugins/nerdtree.vim
+source ~/.vim/config/plugins/ultisnips.vim
+source ~/.vim/config/plugins/ack.vim
+source ~/.vim/config/plugins/fzf.vim
+source ~/.vim/config/plugins/ale.vim
+source ~/.vim/config/plugins/coc.vim
+source ~/.vim/config/plugins/which-key.vim
 
 " Emmet
 "let g:user_emmet_leader_key = "<c-l>"

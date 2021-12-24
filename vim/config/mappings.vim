@@ -16,6 +16,20 @@ noremap <S-Enter> O<ESC>j
 vnoremap < <gv
 vnoremap > >gv
 
+" window navigation
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+" buffer navigation
+noremap <S-l> :bnext<CR>
+noremap <S-h> :bprevious<CR>
+" resize windows w/ arrow keys
+noremap <C-Up> :resize +2<CR>
+noremap <C-Down> :resize -2<CR>
+noremap <C-Left> :vertical resize -2<CR>
+noremap <C-Right> :vertical resize +2<CR>
+
 " ===== Vim help mappings =====
 augroup helpMappings
   autocmd!

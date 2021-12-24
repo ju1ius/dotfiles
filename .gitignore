@@ -11,3 +11,5 @@
 !/vim/swap/.gitkeep
 /vim/.netrwhist
 
+/neovim/plugin/packer_compiled.lua
+
