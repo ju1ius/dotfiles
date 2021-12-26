@@ -1,5 +1,6 @@
 alias sudo="sudo -E"
 alias ll="ls -lah"
+alias nv="nvim"
 ##########
 # Git
 ##########
@@ -20,9 +21,12 @@ alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcl="docker-compose logs"
 
-# Enable XDebug from command-line
-alias php-debug="php -e -d zend_extension=xdebug.so"
-
 # aliases for the kitty terminal emulator
-alias kitcat="kitty +kitten icat"
-alias kiff="kitty +kitten diff"
+if [[ "${TERM}" = 'xterm-kitty' ]];
+then
+  alias kitcat="kitty +kitten icat"
+  alias kiff="kitty +kitten diff"
+  # https://sw.kovidgoyal.net/kitty/faq.html#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
+  # alias ssh="kitty +kitten ssh"
+fi
+
