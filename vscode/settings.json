@@ -5,7 +5,7 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "workbench.colorTheme": "One Dark Pro",
-  "vscode-neovim.neovimExecutablePaths.linux": "/home/ju1ius/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/init.vim",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDragAndDrop": false,
@@ -35,10 +35,12 @@
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "window.zoomLevel": 0,
   "json.format.enable": false,
-  "editor.formatOnSaveMode": "modifications",
   "emmet.includeLanguages": {
     "postcss": "css"
+  },
+  "editor.formatOnSaveMode": "modifications",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 }
