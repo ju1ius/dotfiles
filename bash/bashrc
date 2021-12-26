@@ -143,7 +143,13 @@ if [[ -e "$HOME/.local/bin/deno" ]]; then
   DENO_INSTALL="$HOME/.local"
 fi
 
+# Rust / Rustup
+if [[ -f "${HOME}/.cargo/env" ]]; then
+  source "${HOME}/.cargo/env"
+fi
+
 # fzf
 if [[ -f ~/.fzf.bash ]]; then
   source ~/.fzf.bash
 fi
+
