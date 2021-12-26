@@ -1,4 +1,4 @@
-local packer = require('user.plugins.packer')
+local packer = require('my.plugins.packer')
 
 local not_vscode = [[not vim.g.vscode]]
 
@@ -15,12 +15,12 @@ return packer(function(use)
       {'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter'},
     },
     run = ':TSUpdate',
-    config = [[require('user.plugins.treesitter')]],
+    config = [[require('my.plugins.treesitter')]],
     cond = not_vscode,
   }
   use {
     'navarasu/onedark.nvim',
-    config = [[require('user.plugins.onedark')]],
+    config = [[require('my.plugins.onedark')]],
     cond = not_vscode,
   }
   use {
@@ -29,7 +29,7 @@ return packer(function(use)
       {'kyazdani42/nvim-web-devicons', opt = true},
     },
     wants = {'nvim-web-devicons'},
-    config = [[require('user.plugins.lualine')]],
+    config = [[require('my.plugins.lualine')]],
     cond = not_vscode,
   }
   use {
@@ -39,7 +39,7 @@ return packer(function(use)
     },
     wants = {'nvim-web-devicons'},
     cmd = 'NvimTreeToggle',
-    config = [[require('user.plugins.nvim-tree')]],
+    config = [[require('my.plugins.nvim-tree')]],
     cond = not_vscode,
   }
   use {
@@ -49,7 +49,7 @@ return packer(function(use)
       {'moll/vim-bbye'},
     },
     wants = {'nvim-web-devicons', 'vim-bbye'},
-    config = [[require('user.plugins.bufferline')]],
+    config = [[require('my.plugins.bufferline')]],
     cond = not_vscode,
   }
   -- LSP
@@ -59,7 +59,7 @@ return packer(function(use)
       'neovim/nvim-lspconfig',
     },
     wants = {'nvim-lspconfig'},
-    config = [[require('user.plugins.lsp-installer')]],
+    config = [[require('my.plugins.lsp-installer')]],
     cond = not_vscode,
   }
   -- snippet engine
@@ -81,11 +81,11 @@ return packer(function(use)
       {'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'}, -- snippet completions
       {
         'hrsh7th/cmp-nvim-lsp',
-        config = [[require('user.plugins.cmp-lsp')]],
+        config = [[require('my.plugins.cmp-lsp')]],
         after = {'nvim-cmp', 'nvim-lspconfig'},
       },
     },
-    config = [[require('user.plugins.cmp')]],
+    config = [[require('my.plugins.cmp')]],
     cond = not_vscode,
     wants = 'LuaSnip',
   }
@@ -96,7 +96,7 @@ return packer(function(use)
       {'nvim-lua/plenary.nvim'},
       {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
     },
-    config = [[require('user.plugins.telescope')]],
+    config = [[require('my.plugins.telescope')]],
     cond = not_vscode,
   }
   -- misc
@@ -105,27 +105,33 @@ return packer(function(use)
     requires = {
       'JoosepAlviste/nvim-ts-context-commentstring',
     },
-    config = [[require('user.plugins.comment')]],
+    config = [[require('my.plugins.comment')]],
     cond = not_vscode,
   }
   use {
     'windwp/nvim-autopairs',
-    config = [[require('user.plugins.autopairs')]],
+    config = [[require('my.plugins.autopairs')]],
     cond = not_vscode,
   }
   use {
     'windwp/nvim-ts-autotag',
-    config = [[require('user.plugins.autotag')]],
+    config = [[require('my.plugins.autotag')]],
     cond = not_vscode,
   }
   use {
     'machakann/vim-sandwich',
   }
+  use {
+    'folke/which-key.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = [[require('my.plugins.which-key')]],
+    -- cond = not_vscode,
+  }
   -- git
   use {
     'lewis6991/gitsigns.nvim',
     requires = {'nvim-lua/plenary.nvim'},
-    config = [[require('user.plugins.gitsigns')]],
+    config = [[require('my.plugins.gitsigns')]],
     cond = not_vscode,
   }
 

@@ -21,7 +21,7 @@ local reloadCmd = string.format(
   [[
     augroup packer_user_config
       autocmd!
-      autocmd BufWritePost %s/*.lua lua require('user.utils').reload_vimrc()
+      autocmd BufWritePost %s/*.lua lua require('my.utils').reload_vimrc()
     augroup end
   ]],
   dirname
