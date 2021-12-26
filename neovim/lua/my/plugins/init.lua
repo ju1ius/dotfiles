@@ -125,7 +125,12 @@ return packer(function(use)
     'folke/which-key.nvim',
     requires = {'nvim-lua/plenary.nvim'},
     config = [[require('my.plugins.which-key')]],
-    -- cond = not_vscode,
+    cond = not_vscode,
+  }
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = [[require('my.plugins.indent-blankline')]],
+    cond = not_vscode,
   }
   -- git
   use {

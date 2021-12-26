@@ -1,7 +1,7 @@
-local utils = require('user.utils')
-require('user.options')
-require('user.keymaps')
-require('user.plugins')
+local utils = require('my.utils')
+require('my.options')
+require('my.keymaps')
+require('my.plugins')
 
 utils.register_mappings()
 utils.source('/autocommands.vim')

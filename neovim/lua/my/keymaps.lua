@@ -129,8 +129,8 @@ if not vim.g.vscode then
 else
   -- https://open-vsx.org/extension/asvetliakov/vscode-neovim
   -- vim-commentary like mappings
-  mapkey('x', 'gc', '<Plug>VSCodeCommentary', {})
-  mapkey('n', 'gc', '<Plug>VSCodeCommentary', {})
-  mapkey('o', 'gc', '<Plug>VSCodeCommentary', {})
-  mapkey('n', 'gcc', '<Plug>VSCodeCommentaryLine', {})
+  mapkey('x', 'gc', '<Plug>VSCodeCommentary', opts)
+  mapkey('n', 'gc', '<Plug>VSCodeCommentary',opts)
+  mapkey('o', 'gc', '<Plug>VSCodeCommentary', opts)
+  mapkey('n', 'gcc', '<Plug>VSCodeCommentaryLine', opts)
 end

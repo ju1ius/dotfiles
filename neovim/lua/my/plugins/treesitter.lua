@@ -41,7 +41,9 @@ configs.setup({
   }
 })
 
-vim.cmd([[
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-]])
+-- set foldmethod to expression
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = [[nvim_treesitter#foldexpr()]]
+-- start with folds open by default
+vim.opt.foldlevel= 99
+
