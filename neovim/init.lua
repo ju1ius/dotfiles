@@ -1,8 +1,6 @@
-local utils = require('my.utils')
-require('my.options')
-require('my.keymaps')
-require('my.plugins')
+require('impatient').enable_profile()
 
-utils.register_mappings()
-utils.source('/autocommands.vim')
-
+-- Do all init in my/config.lua so impatient can cache it
+require('my.config')
+-- idem for packer
+require('packer_compiled')

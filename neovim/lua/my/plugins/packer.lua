@@ -1,11 +1,9 @@
 -- https://github.com/wbthomason/packer.nvim
 
-local fn = vim.fn
-
 -- Automatically install packer
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system({
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if not vim.loop.fs_stat(install_path) then
+  PACKER_BOOTSTRAP = vim.fn.system({
     'git', 'clone', '--depth', '1',
     'https://github.com/wbthomason/packer.nvim',
     install_path,
@@ -21,7 +19,7 @@ local reloadCmd = string.format(
   [[
     augroup packer_user_config
       autocmd!
-      autocmd BufWritePost %s/*.lua lua require('my.utils').reload_vimrc()
+      autocmd BufWritePost %s/init.lua lua require('my.utils').reload_vimrc()
     augroup end
   ]],
   dirname
@@ -42,6 +40,8 @@ return function(setup)
         return require('packer.util').float({border = 'rounded'})
       end,
     },
+    -- Move to lua dir so impatient.nvim can cache it
+    compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua'
   })
 
   -- Install your plugins here

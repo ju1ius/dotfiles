@@ -3,6 +3,7 @@ local packer = require('my.plugins.packer')
 local not_vscode = [[not vim.g.vscode]]
 
 return packer(function(use)
+  use 'lewis6991/impatient.nvim'
   -- Have packer manage itself
   use 'wbthomason/packer.nvim'
   -- Useful lua functions used ny lots of plugins

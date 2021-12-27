@@ -1,9 +1,11 @@
+vim.cmd([[
+
 " ===== Vim help mappings =====
 augroup help_mappings
   autocmd!
   " <enter> to follow tag
   autocmd FileType help nnoremap <buffer><cr> <c-]>
-  " <backspace> to gi back
+  " <backspace> to go back
   autocmd FileType help nnoremap <buffer><bs> <c-T>
   " <q> to quit
   autocmd FileType help nnoremap <buffer>q :q<CR>
@@ -17,3 +19,4 @@ augroup ft_tab_sizes
   autocmd FileType make setlocal noexpandtab
 augroup END
 
+]])
