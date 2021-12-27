@@ -1,3 +1,5 @@
+local K = require('my.utils.keys')
+
 local M = {
   capabilities = vim.lsp.protocol.make_client_capabilities(),
 }
@@ -59,26 +61,52 @@ local function lsp_highlight_document(client)
 end
 
 local function lsp_keymaps(bufnr)
-  local opts = {noremap = true, silent = true}
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  K.map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP go to declaration',
+  })
+  K.map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP go to definition',
+  })
+  K.map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP show popup',
+  })
+  K.map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP go to implementations',
+  })
+  K.map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP show signature',
+  })
+  K.map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP rename symbol',
+  })
+  K.map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP go to references',
+  })
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<CR>', opts)
-  vim.api.nvim_buf_set_keymap(
-    bufnr,
-    'n',
-    'gl',
-    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = "rounded"})<CR>',
-    opts
-  )
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  K.map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<CR>', {
+    buffer = bufnr,
+    summary = 'LSP go to next diagnostic',
+  })
+  K.map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<CR>', {
+    buffer = bufnr,
+    summary = 'LSP go to previous diagnostic',
+  })
+  K.map('n', 'gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = "rounded"})<CR>', {
+    buffer = bufnr,
+    summary = 'LSP show line diagnostics',
+  })
+  K.map('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP show loclist',
+  })
   vim.cmd([[
     command! Format execute 'lua vim.lsp.buf.formatting()'
   ]])

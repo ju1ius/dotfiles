@@ -2,7 +2,8 @@
 -- TODO: add keymap for :IndentBlanklineToggle
 
 require('indent_blankline').setup({
-  enabled = false,
+  disable_with_nolist = true,
+  use_treesitter = true,
   char = '▏',
   -- context_char = '▎',
   context_char = '▏',

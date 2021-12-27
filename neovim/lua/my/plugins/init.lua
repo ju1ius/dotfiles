@@ -39,8 +39,9 @@ return packer(function(use)
       {'kyazdani42/nvim-web-devicons', opt = true},
     },
     wants = {'nvim-web-devicons'},
-    cmd = 'NvimTreeToggle',
-    config = [[require('my.plugins.nvim-tree')]],
+    cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},
+    setup = [[require('my.plugins.nvim-tree').setup()]],
+    config = [[require('my.plugins.nvim-tree').configure()]],
     cond = not_vscode,
   }
   use {
@@ -105,7 +106,10 @@ return packer(function(use)
       {'nvim-lua/plenary.nvim'},
       {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
     },
-    config = [[require('my.plugins.telescope')]],
+    cmd = 'Telescope',
+    module = 'telescope',
+    setup = [[require('my.plugins.telescope').setup()]],
+    config = [[require('my.plugins.telescope').configure()]],
     cond = not_vscode,
   }
   -- misc
@@ -124,17 +128,13 @@ return packer(function(use)
   }
   use {
     'windwp/nvim-ts-autotag',
+    requires = {'nvim-treesitter/nvim-treesitter'},
+    wants = {'nvim-treesitter'},
     config = [[require('my.plugins.autotag')]],
     cond = not_vscode,
   }
   use {
     'machakann/vim-sandwich',
-  }
-  use {
-    'folke/which-key.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
-    config = [[require('my.plugins.which-key')]],
-    cond = not_vscode,
   }
   use {
     'lukas-reineke/indent-blankline.nvim',

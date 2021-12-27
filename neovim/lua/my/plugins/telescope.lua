@@ -1,11 +1,33 @@
 -- https://github.com/nvim-telescope/telescope.nvim#getting-started
 
-local telescope = require('telescope')
-local actions = require('telescope.actions')
+local M = {}
 
--- telescope.load_extension('media_files')
+function M.setup()
+  local map = require('my.utils.keys').map
+  map('n', '<leader>ff', [[:lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer=false}))<CR>]], {
+    summary = 'Find file with Telescope',
+  })
+  map('n', '<leader>fr', ':Telescope oldfiles<CR>', {
+    summary = 'Find recent files',
+  })
+  map('n', '<leader>fgc', ':Telescope git_commits<CR>', {
+    summary = 'Find git commit',
+  })
+  map('n', '<leader>fgcb', ':Telescope git_bcommits<CR>', {
+    summary = 'Find current buffer git commit',
+  })
+  map('n', '<C-t>', ':Telescope live_grep<CR>', {
+    summary = 'Telescope live grep',
+  })
+  map('n', '<leader>fk', ':Telescope my_keymaps list<CR>', {
+    summary = 'Find key mapping',
+  })
+end
 
-telescope.setup({
+function M.configure()
+  local telescope = require('telescope')
+  local actions = require('telescope.actions')
+  telescope.setup({
     defaults = {
 
       prompt_prefix = ' ',
@@ -93,6 +115,7 @@ telescope.setup({
         override_file_sorter = true,
         case_mode = 'smart_case',
       },
+      my_keymaps = {},
       -- media_files = {
       --   -- filetypes whitelist
       --   -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
@@ -107,5 +130,10 @@ telescope.setup({
     },
   })
 
-telescope.load_extension('fzf')
+  telescope.load_extension('fzf')
+  telescope.load_extension('my_keymaps')
+-- telescope.load_extension('media_files')
+end
+
+return M
 

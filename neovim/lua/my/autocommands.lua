@@ -19,4 +19,9 @@ augroup ft_tab_sizes
   autocmd FileType make setlocal noexpandtab
 augroup END
 
+augroup ju1ius_keymaps
+  autocmd!
+  autocmd BufUnload * lua require('my.utils.keys').clear_buffer(vim.fn.expand('<abuf>'))
+augroup END
+
 ]])

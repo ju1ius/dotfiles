@@ -1,4 +1,5 @@
 -- https://github.com/kyazdani42/nvim-tree.lua
+local M = {}
 
 vim.g.nvim_tree_icons = {
   default = '',
@@ -24,11 +25,20 @@ vim.g.nvim_tree_icons = {
   },
 }
 
-local nvim_tree = require('nvim-tree')
+function M.setup()
+  local map = require('my.utils.keys').map
+  map('n', '<leader>te', ':NvimTreeFindFileToggle<CR>', {
+    summary = 'Toggle file explorer',
+  })
+end
 
-nvim_tree.setup({
-  diagnostics = {
-    enable = true,
-  },
-})
+function M.configure()
+  local nvim_tree = require('nvim-tree')
+  nvim_tree.setup({
+    diagnostics = {
+      enable = true,
+    },
+  })
+end
 
+return M
