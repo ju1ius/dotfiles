@@ -63,6 +63,14 @@ return packer(function(use)
     config = [[require('my.plugins.lsp-installer')]],
     cond = not_vscode,
   }
+  use {
+    'folke/trouble.nvim',
+    requires = {
+      {'kyazdani42/nvim-web-devicons', opt = true},
+    },
+    config = [[require('my.plugins.trouble')]],
+    cond = not_vscode,
+  }
   -- snippet engine
   use {
     'L3MON4D3/LuaSnip',
