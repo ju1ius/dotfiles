@@ -148,6 +148,10 @@ return packer(function(use)
     config = [[require('my.plugins.gitsigns')]],
     cond = not_vscode,
   }
+  use {
+    'tpope/vim-fugitive',
+    cond = not_vscode,
+  }
 
 end)
 

@@ -42,7 +42,7 @@ local function pick(opts)
   opts = opts or {}
   local bufnr = vim.fn.bufnr()
   local p = pickers.new(opts, {
-    prompt_title = 'Test picker',
+    prompt_title = 'My Keymaps',
     finder = finders.new_table({
       results = K.get_all(bufnr),
       entry_maker = function(entry)
