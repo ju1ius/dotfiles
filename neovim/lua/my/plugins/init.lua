@@ -81,6 +81,16 @@ return packer(function(use)
     config = [[require('my.plugins.trouble')]],
     cond = not_vscode,
   }
+  -- Debuggers
+  -- use {
+  --   'mfussenegger/nvim-dap',
+  --   cond = not_vscode,
+  -- }
+  use {
+    'puremourning/vimspector',
+    config = [[require('my.plugins.vimspector')]],
+    cond = not_vscode,
+  }
   -- snippet engine
   use {
     'L3MON4D3/LuaSnip',

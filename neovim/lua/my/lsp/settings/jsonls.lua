@@ -1,6 +1,18 @@
 -- Find more schemas here: https://www.schemastore.org/json/
 local schemas = {
   {
+    description = 'Vimspector debugger configuration file.',
+    fileMatch = {
+      '.vimspector.json',
+    },
+    url = 'https://puremourning.github.io/vimspector/schema/vimspector.schema.json',
+  },
+  {
+    description = 'Vimspector debug adapter configuration file.',
+    fileMatch = {'.gadgets.json', '.gadgets.d/*.json'},
+    url = 'https://puremourning.github.io/vimspector/schema/gadgets.schema.json'
+  },
+  {
     description = "NPM configuration file",
     fileMatch = {
       "package.json",
