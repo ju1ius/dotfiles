@@ -11,7 +11,7 @@ map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {
   expr = true,
   summary = 'Git go to next hunk',
 })
-map('n', ']c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {
+map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {
   expr = true,
   summary = 'Git go to previous hunk',
 })

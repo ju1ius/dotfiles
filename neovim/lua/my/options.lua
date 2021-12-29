@@ -2,7 +2,7 @@
 vim.opt.fileencoding = 'utf-8'
 -- show line numbers
 vim.opt.number = true
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 -- always show the sign column, otherwise it would shift the text each time
 vim.opt.signcolumn = 'yes'
 -- no line wrapping
