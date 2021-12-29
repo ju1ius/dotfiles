@@ -1,25 +1,25 @@
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-local runtime_lib = vim.api.nvim_get_runtime_file('', true)
 
 return {
   settings = {
     Lua = {
       runtime = {
         version = 'LuaJIT',
-        path = runtime_path,
+        path = vim.list_extend(
+          {'lua/?.lua', 'lua/?/init.lua'},
+          vim.split(package.path, ';')
+        ),
       },
       diagnostics = {
         globals = {'vim'},
       },
       workspace = {
-        library = runtime_lib,
---        library = {
---          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
---          [vim.fn.stdpath('config') .. '/lua'] = true,
---        },
+        library = vim.api.nvim_get_runtime_file('', true),
+        -- library = {
+        --   [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+        --   [vim.fn.stdpath('config') .. '/lua'] = true,
+        -- },
+        -- see issues #679 and #783 (https://github.com/sumneko/lua-language-server/issues/679)
+        checkThirdParty = false,
       },
       telemetry = {enable = false},
     },
