@@ -65,6 +65,15 @@ return packer(function(use)
     cond = not_vscode,
   }
   use {
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = {
+      'neovim/nvim-lspconfig',
+    },
+    wants = {'nvim-lspconfig'},
+    config = [[require('my.plugins.null-ls')]],
+    cond = not_vscode,
+  }
+  use {
     'folke/trouble.nvim',
     requires = {
       {'kyazdani42/nvim-web-devicons', opt = true},
