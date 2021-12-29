@@ -81,7 +81,7 @@ local function lsp_keymaps(bufnr)
     buffer = bufnr,
     summary = 'LSP show signature',
   })
-  K.map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', {
+  K.map('n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', {
     buffer = bufnr,
     summary = 'LSP rename symbol',
   })
@@ -89,7 +89,10 @@ local function lsp_keymaps(bufnr)
     buffer = bufnr,
     summary = 'LSP go to references',
   })
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  K.map('n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP code action',
+  })
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   K.map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<CR>', {
     buffer = bufnr,
@@ -103,9 +106,13 @@ local function lsp_keymaps(bufnr)
     buffer = bufnr,
     summary = 'LSP show line diagnostics',
   })
-  K.map('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', {
+  K.map('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', {
     buffer = bufnr,
     summary = 'LSP show loclist',
+  })
+  K.map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', {
+    buffer = bufnr,
+    summary = 'LSP format document',
   })
   vim.cmd([[
     command! Format execute 'lua vim.lsp.buf.formatting()'
