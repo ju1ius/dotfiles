@@ -4,8 +4,8 @@
 local map = require('my.utils.keys').map
 
 map('n', '<leader>tu', ':UndotreeToggle<CR>', {
-  summary = 'Toggles undo tree panel.',
   topic = 'undo',
+  summary = 'Toggles undo tree panel.',
 })
 
 -- focus undotree window on open

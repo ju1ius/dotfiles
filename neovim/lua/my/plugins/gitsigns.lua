@@ -9,49 +9,57 @@ local map = require('my.utils.keys').map
 
 map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {
   expr = true,
-  summary = 'Git go to next hunk',
+  topic = 'git',
+  summary = 'Go to next hunk',
 })
 map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {
   expr = true,
-  summary = 'Git go to previous hunk',
+  topic = 'git',
+  summary = 'Go to previous hunk',
 })
 map({'n', 'v'}, '<leader>ghs', '<cmd>Gitsigns stage_hunk<CR>', {
   summary = 'Git stage current hunk',
+  topic = 'git',
 })
--- map('v', '<leader>hs', ':Gitsigns stage_hunk<CR>', {
+-- mapV', '<leader>hs', ':Gitsigns stage_hunk<CR>', {
 --   summary = 'Git stage current hunk',
 -- })
 map('n', '<leader>ghu', '<cmd>Gitsigns undo_stage_hunk<CR>', {
-  summary = 'Gut undo stage hunk',
+  topic = 'git',
+  summary = 'Undo stage hunk',
 })
 map({'n', 'v'}, '<leader>ghr', '<cmd>Gitsigns reset_hunk<CR>', {
   summary = 'Git reset hunk',
+  topic = 'git',
 })
--- map('v', '<leader>hr', ':Gitsigns reset_hunk<CR>', {
+-- mapV', '<leader>hr', ':Gitsigns reset_hunk<CR>', {
 --   summary = 'Git reset hunk',
 -- })
 map('n', '<leader>ghR', '<cmd>Gitsigns reset_buffer<CR>', {
+  topic = 'git',
   summary = 'Gitsigns reset buffer',
 })
 map('n', '<leader>ghp', '<cmd>Gitsigns preview_hunk<CR>', {
-  summary = 'Git preview hunk',
+  topic = 'git',
+  summary = 'Preview hunk',
 })
 map('n', '<leader>ghb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', {
-  summary = 'Git blame line',
+  topic = 'git',
+  summary = 'Blame line',
 })
 map('n', '<leader>ghS', '<cmd>Gitsigns stage_buffer<CR>', {
-  summary = 'Git stage buffer',
+  topic = 'git',
+  summary = 'Stage buffer',
 })
 map('n', '<leader>ghU', '<cmd>Gitsigns reset_buffer_index<CR>', {
+  topic = 'git',
   summary = 'Gitsigns reset buffer index',
 })
 
 -- text objects
 
-map('o', 'h', ':<C-U>Gitsigns select_hunk<CR>', {
-  summary = 'Git select hunk',
-})
-map('x', 'h', ':<C-U>Gitsigns select_hunk<CR>', {
-  summary = 'Git select hunk',
+map({'o', 'x'}, 'h', ':<C-U>Gitsigns select_hunk<CR>', {
+  topic = 'git',
+  summary = 'Select hunk',
 })
 

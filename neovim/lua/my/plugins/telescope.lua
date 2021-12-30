@@ -14,12 +14,12 @@ function M.setup()
     summary = 'Find git commit',
   })
   map('n', '<leader>fgcb', ':Telescope git_bcommits<CR>', {
-    summary = 'Find current buffer git commit',
+    summary = 'Find git commit for current buffer',
   })
   map('n', '<C-t>', ':Telescope live_grep<CR>', {
     summary = 'Telescope live grep',
   })
-  map('n', '<leader>fk', ':Telescope my_keymaps list<CR>', {
+  map('n', '<leader>fk', ':Telescope my_keymaps list layout_strategy=center<CR>', {
     summary = 'Find key mapping',
   })
 end

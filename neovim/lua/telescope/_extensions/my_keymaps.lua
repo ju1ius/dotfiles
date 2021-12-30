@@ -38,6 +38,29 @@ local function get_preview(entry)
   return lines
 end
 
+local function display_entry(entry)
+  local mapping = entry.value
+  local value = ''
+  if mapping.opts.topic then
+    value = '[' .. mapping.opts.topic .. '] '
+  end
+  if mapping.opts.summary then
+    value = value .. mapping.opts.summary
+  end
+  return value
+end
+
+local function get_ordinal(mapping)
+  if not mapping.opts.summary then
+    return nil
+  end
+  local value = ''
+  if mapping.opts.topic then
+    value = mapping.opts.topic
+  end
+  return value .. ' ' .. mapping.opts.summary
+end
+
 local function pick(opts)
   opts = opts or {}
   local bufnr = vim.fn.bufnr()
@@ -48,8 +71,8 @@ local function pick(opts)
       entry_maker = function(entry)
         return {
           value = entry,
-          display = entry.opts.summary,
-          ordinal = entry.opts.summary,
+          display = display_entry,
+          ordinal = get_ordinal(entry),
         }
       end
     }),
