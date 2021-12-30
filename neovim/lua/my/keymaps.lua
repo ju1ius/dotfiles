@@ -1,6 +1,9 @@
 local map = require('my.utils.keys').map
 local term_opts = {silent = true}
 
+-- removes help message when pressing <C-c> in normal mode
+vim.api.nvim_set_keymap('n', '<C-c>', '<C-c>', {noremap = true, silent = true})
+
 -- use space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', {noremap = true, silent = true})
 vim.g.mapleader = ' '
