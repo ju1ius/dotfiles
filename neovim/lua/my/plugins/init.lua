@@ -133,6 +133,15 @@ return packer(function(use)
   }
   -- misc
   use {
+    'machakann/vim-sandwich',
+  }
+  use {
+    'mbbill/undotree',
+    setup = [[require('my.plugins.undotree')]],
+    cmd = 'UndotreeToggle',
+    cond = not_vscode,
+  }
+  use {
     'numToStr/Comment.nvim',
     requires = {
       'JoosepAlviste/nvim-ts-context-commentstring',
@@ -151,9 +160,6 @@ return packer(function(use)
     wants = {'nvim-treesitter'},
     config = [[require('my.plugins.autotag')]],
     cond = not_vscode,
-  }
-  use {
-    'machakann/vim-sandwich',
   }
   use {
     'lukas-reineke/indent-blankline.nvim',

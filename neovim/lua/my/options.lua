@@ -35,6 +35,10 @@ vim.opt.listchars = {eol = '↴'}
 -------------------- Backups
 vim.opt.backup = false
 vim.opt.swapfile = false
+-- persistent undo
+if not vim.g.vscode then
+  vim.opt.undofile = true
+end
 
 -------------------- GUI
 vim.opt.cmdheight = 2
@@ -53,3 +57,4 @@ vim.cmd([[
   colorscheme default
   set background=dark
 ]])
+
