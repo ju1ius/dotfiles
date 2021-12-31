@@ -1,8 +1,8 @@
 " enables hidden buffers (required to keep multiple buffers open)
 set hidden
 " set directories for swap files & backups
-set directory=~/.vim/swap//,.
-set backupdir=~/.vim/backup//,.
+set directory=~/.local/share/vim/swap//,.
+set backupdir=~/.local/share/vim/backup//,.
 
 " ========== Appearance ==========
 set guioptions=aegimrLt
