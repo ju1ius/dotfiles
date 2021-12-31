@@ -144,8 +144,9 @@ return packer(function(use)
   use {
     'numToStr/Comment.nvim',
     requires = {
-      'JoosepAlviste/nvim-ts-context-commentstring',
+      {'JoosepAlviste/nvim-ts-context-commentstring', opt = true},
     },
+    wants = {'nvim-ts-context-commentstring'},
     config = [[require('my.plugins.comment')]],
     cond = not_vscode,
   }
@@ -176,6 +177,12 @@ return packer(function(use)
   use {
     'tpope/vim-fugitive',
     cond = not_vscode,
+  }
+  use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end,
+    setup = [[require('my.plugins.firenvim')]],
+    cond = [[vim.g.started_by_firenvim]],
   }
 
 end)
