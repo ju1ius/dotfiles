@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 _prompt.cwd.truncate_left() {
   local -i max_len="$1"
   local cwd="$2"
@@ -45,10 +47,10 @@ _prompt.cwd.shorten_path() {
 
 
 _prompt.pwd() {
-  PROMPT_REPLY[color]='cwd'
+  PROMPT_REPLY['color']='cwd'
   if (( ! PROMPT_SHORTEN_PATH ))
   then
-    PROMPT_REPLY[content]='\w'
+    PROMPT_REPLY['content']='\w'
     return 0
   fi
 
@@ -66,5 +68,5 @@ _prompt.pwd() {
     prompt_cwd="$(_prompt.cwd.shorten_path $max_len $PROMPT_PATH_KEEP $cwd)"
   fi
 
-  PROMPT_REPLY[content]="$prompt_cwd"
+  PROMPT_REPLY['content']="$prompt_cwd"
 }

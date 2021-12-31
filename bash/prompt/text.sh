@@ -1,6 +1,8 @@
+# shellcheck shell=bash
+
 _prompt.text() {
-  PROMPT_REPLY[content]="$1"
-  PROMPT_REPLY[color]="${2:-default}"
+  PROMPT_REPLY['content']="$1"
+  PROMPT_REPLY['color']="${2:-default}"
 }
 
 _prompt.blank() {

@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 alias sudo="sudo -E"
 alias ll="ls -lah"
 alias nv="nvim"

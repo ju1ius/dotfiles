@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 _prompt.git.is_repo() {
   if [[ -n "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]]

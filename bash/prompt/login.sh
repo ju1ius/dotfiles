@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 _prompt.login.user() {
   if [[ "${EUID}" = "0" || "${USER}" != "${LOGNAME}" ]]
   then
