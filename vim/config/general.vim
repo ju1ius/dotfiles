@@ -6,7 +6,7 @@ set backupdir=~/.vim/backup//,.
 
 " ========== Appearance ==========
 set guioptions=aegimrLt
-set guifont=Fira\ Code\ Nerd\ Font\ 11
+set guifont=JetBrains\ Mono\ Nerd\ Font\ 11
 set mouse=a
 if version >= 800
   set belloff=all

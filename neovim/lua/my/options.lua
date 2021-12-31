@@ -45,7 +45,7 @@ vim.opt.cmdheight = 2
 -- popup menu height
 vim.opt.pumheight = 10
 vim.opt.guioptions = 'aegimrLt'
-vim.opt.guifont = 'Fira Code Nerd Font 11'
+vim.opt.guifont = 'JetBrains Mono Nerd Font Regular 11'
 vim.opt.mouse = 'a'
 vim.opt.belloff = 'all'
 -- termguicolors doesn't work inside tmux sessions...

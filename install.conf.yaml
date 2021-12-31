@@ -10,6 +10,9 @@
 - link:
   ~/.dotfiles: ''
   ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
+  ~/.config/fontconfig/conf.d/:
+    glob: true
+    path: fontconfig/*
   ~/.bashrc: bash/bashrc
   ~/.tmux.conf: tmux/tmux.conf
   ~/.vim: vim
@@ -17,7 +20,6 @@
   ~/.config/nvim: neovim
   ~/.config/VSCodium/User/settings.json: vscode/settings.json
   ~/.npmrc: node/npmrc
-  ~/.fonts.conf.d/99-vscode.conf: fontconfig/99-vscode.conf
   ~/.config/kitty: kitty
 
 - shell:
