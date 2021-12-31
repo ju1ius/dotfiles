@@ -14,6 +14,9 @@
 
 - link:
     ~/.dotfiles: ''
+    ~/bin/:
+      glob: true
+      path: bin/*
     ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
     ~/.config/fontconfig/conf.d/:
       glob: true
