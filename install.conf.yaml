@@ -1,26 +1,31 @@
 - defaults:
-  link:
-    create: true
-    relink: true
+    link:
+      create: true
+      relink: true
 
 - clean:
   - '~'
   - ~/.config
 
+- create:
+  - ~/.config/fontconfig/conf.d
+  - ~/.local/share/vim/swap
+  - ~/.local/share/vim/backup
+
 - link:
-  ~/.dotfiles: ''
-  ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
-  ~/.config/fontconfig/conf.d/:
-    glob: true
-    path: fontconfig/*
-  ~/.bashrc: bash/bashrc
-  ~/.tmux.conf: tmux/tmux.conf
-  ~/.vim: vim
-  ~/.vimrc: vim/init.vim
-  ~/.config/nvim: neovim
-  ~/.config/VSCodium/User/settings.json: vscode/settings.json
-  ~/.npmrc: node/npmrc
-  ~/.config/kitty: kitty
+    ~/.dotfiles: ''
+    ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
+    ~/.config/fontconfig/conf.d/:
+      glob: true
+      path: fontconfig/*
+    ~/.bashrc: bash/bashrc
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.vim: vim
+    ~/.vimrc: vim/init.vim
+    ~/.config/nvim: neovim
+    ~/.config/VSCodium/User/settings.json: vscode/settings.json
+    ~/.npmrc: node/npmrc
+    ~/.config/kitty: kitty
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
