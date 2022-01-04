@@ -20,6 +20,11 @@ return packer(function(use)
     cond = not_vscode,
   }
   use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+     requires = {'nvim-treesitter/nvim-treesitter'},
+     after = 'nvim-treesitter',
+  }
+  use {
     'navarasu/onedark.nvim',
     config = [[require('my.plugins.onedark')]],
     cond = not_vscode,
@@ -143,9 +148,6 @@ return packer(function(use)
   }
   use {
     'numToStr/Comment.nvim',
-    requires = {
-      {'JoosepAlviste/nvim-ts-context-commentstring', opt = true},
-    },
     wants = {'nvim-ts-context-commentstring'},
     config = [[require('my.plugins.comment')]],
     cond = not_vscode,
