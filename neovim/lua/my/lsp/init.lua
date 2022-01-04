@@ -101,7 +101,6 @@ local function lsp_keymaps(bufnr)
     topic = 'lsp',
     summary = 'Code action',
   })
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   K.map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<CR>', {
     buffer = bufnr,
     topic = 'lsp',
@@ -112,7 +111,7 @@ local function lsp_keymaps(bufnr)
     topic = 'lsp',
     summary = 'Go to previous diagnostic',
   })
-  K.map('n', 'gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = "rounded"})<CR>', {
+  K.map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
     summary = 'Show line diagnostics',

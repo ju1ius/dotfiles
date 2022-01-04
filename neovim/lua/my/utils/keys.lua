@@ -25,11 +25,11 @@ local function register(mapping)
   local h = hash(mapping)
   local buffer = mapping.opts.buffer
   if buffer then
-    buffer = tostring(buffer)
-    if buf_mappings[buffer] == nil then
-      buf_mappings[buffer] = {}
+    local bufkey = tostring(buffer)
+    if buf_mappings[bufkey] == nil then
+      buf_mappings[bufkey] = {}
     end
-    buf_mappings[buffer][h] = mapping
+    buf_mappings[bufkey][h] = mapping
   else
     mappings[h] = mapping
   end
@@ -38,7 +38,7 @@ local function register(mapping)
     if buffer == nil then
       vim.api.nvim_set_keymap(mode, mapping.lhs, mapping.rhs, opts)
     else
-      vim.api.nvim_buf_set_keymap(buffer, mode, mapping.lhs, mapping.rhs, opts)
+      vim.api.nvim_buf_set_keymap(tonumber(buffer), mode, mapping.lhs, mapping.rhs, opts)
     end
   end
 end
