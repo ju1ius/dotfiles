@@ -7,5 +7,5 @@ require('trouble').setup({
 local map = require('my.utils.keys').map
 map('n', '<leader>td', ':TroubleToggle<CR>', {
   topic = 'lsp',
-  summary = 'Toggle diagnostics window (trouble.nvim)',
+  desc = 'Toggle diagnostics window (trouble.nvim)',
 })

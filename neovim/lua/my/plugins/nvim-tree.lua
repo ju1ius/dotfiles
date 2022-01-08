@@ -28,7 +28,7 @@ vim.g.nvim_tree_icons = {
 function M.setup()
   local map = require('my.utils.keys').map
   map('n', '<leader>te', ':NvimTreeFindFileToggle<CR>', {
-    summary = 'Toggle file explorer',
+    desc = 'Toggle file explorer',
   })
 end
 

@@ -5,22 +5,22 @@ local M = {}
 function M.setup()
   local map = require('my.utils.keys').map
   map('n', '<leader>ff', [[:lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer=false}))<CR>]], {
-    summary = 'Find file with Telescope',
+    desc = 'Find file with Telescope',
   })
   map('n', '<leader>fr', ':Telescope oldfiles<CR>', {
-    summary = 'Find recent files',
+    desc = 'Find recent files',
   })
   map('n', '<leader>fgc', ':Telescope git_commits<CR>', {
-    summary = 'Find git commit',
+    desc = 'Find git commit',
   })
   map('n', '<leader>fgcb', ':Telescope git_bcommits<CR>', {
-    summary = 'Find git commit for current buffer',
+    desc = 'Find git commit for current buffer',
   })
   map('n', '<C-t>', ':Telescope live_grep<CR>', {
-    summary = 'Telescope live grep',
+    desc = 'Telescope live grep',
   })
   map('n', '<leader>fk', ':Telescope my_keymaps list layout_strategy=center<CR>', {
-    summary = 'Find key mapping',
+    desc = 'Find key mapping',
   })
 end
 

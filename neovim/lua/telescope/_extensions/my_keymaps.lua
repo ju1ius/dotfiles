@@ -10,7 +10,7 @@ local K = require('my.utils.keys')
 
 local function get_preview(entry)
   local lines = {}
-  local summary = string.format('" %s', entry.opts.summary)
+  local summary = string.format('" %s', entry.opts.desc)
   table.insert(lines, summary)
   for _, mode in ipairs(entry.modes) do
     local prefix = mode
@@ -44,21 +44,21 @@ local function display_entry(entry)
   if mapping.opts.topic then
     value = '[' .. mapping.opts.topic .. '] '
   end
-  if mapping.opts.summary then
-    value = value .. mapping.opts.summary
+  if mapping.opts.desc then
+    value = value .. mapping.opts.desc
   end
   return value
 end
 
 local function get_ordinal(mapping)
-  if not mapping.opts.summary then
+  if not mapping.opts.desc then
     return nil
   end
   local value = ''
   if mapping.opts.topic then
     value = mapping.opts.topic
   end
-  return value .. ' ' .. mapping.opts.summary
+  return value .. ' ' .. mapping.opts.desc
 end
 
 local function pick(opts)

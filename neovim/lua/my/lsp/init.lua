@@ -64,67 +64,67 @@ local function lsp_keymaps(bufnr)
   K.map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Go to declaration',
+    desc = 'Go to declaration',
   })
   K.map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Go to definition',
+    desc = 'Go to definition',
   })
   K.map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Show popup',
+    desc = 'Show popup',
   })
   K.map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Go to implementations',
+    desc = 'Go to implementations',
   })
   K.map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Show signature',
+    desc = 'Show signature',
   })
   K.map('n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Rename symbol',
+    desc = 'Rename symbol',
   })
   K.map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Go to references',
+    desc = 'Go to references',
   })
   K.map('n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Code action',
+    desc = 'Code action',
   })
   K.map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Go to next diagnostic',
+    desc = 'Go to next diagnostic',
   })
   K.map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Go to previous diagnostic',
+    desc = 'Go to previous diagnostic',
   })
   K.map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Show line diagnostics',
+    desc = 'Show line diagnostics',
   })
   K.map('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Show diagnostics loclist',
+    desc = 'Show diagnostics loclist',
   })
   K.map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
-    summary = 'Format document',
+    desc = 'Format document',
   })
   vim.cmd([[
     command! Format execute 'lua vim.lsp.buf.formatting()'

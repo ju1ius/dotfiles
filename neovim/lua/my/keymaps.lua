@@ -20,93 +20,93 @@ vim.g.maplocalleader = ' '
 -- Normal --
 
 map('n', '<Enter>', 'o<ESC>k', {
-  summary = 'Insert blank line after current',
+  desc = 'Insert blank line after current',
 })
 map('n', '<S-Enter>', 'o<ESC>j', {
-  summary = 'Insert blank line before current',
+  desc = 'Insert blank line before current',
 })
 
 map({'n', 'v', 'o'}, '<leader>y', '"+y', {
-  summary = 'Yank to clipboard',
+  desc = 'Yank to clipboard',
 })
 map('', '<leader>yy', '"+yy', {
-  summary = 'Yank line to clipboard',
+  desc = 'Yank line to clipboard',
 })
 map('', '<leader>p', '"+p', {
-  summary = 'Paste from clipboard',
+  desc = 'Paste from clipboard',
 })
 map('', '<leader>P', '"+P', {
-  summary = 'Paste from clipboard, insert before',
+  desc = 'Paste from clipboard, insert before',
 })
 
 -- window navigation
 map('n', '<C-h>', '<C-w>h', {
-  summary = 'Go to window left',
+  desc = 'Go to window left',
 })
 map('n', '<C-j>', '<C-w>j', {
-  summary = 'Go to window down',
+  desc = 'Go to window down',
 })
 map('n', '<C-k>', '<C-w>k', {
-  summary = 'Go to window up',
+  desc = 'Go to window up',
 })
 map('n', '<C-l>', '<C-w>l', {
-  summary = 'Go to window right',
+  desc = 'Go to window right',
 })
 -- buffer navigation
 map('n', '<S-l>', ':bnext<CR>', {
-  summary = 'Go to next buffer',
+  desc = 'Go to next buffer',
 })
 map('n', '<S-h>', ':bprevious<CR>', {
-  summary = 'Go to previous buffer',
+  desc = 'Go to previous buffer',
 })
 -- resize windows w/ arrow keys
 map('n', '<C-Up>', ':resize +2<CR>', {
-  summary = 'Increase window height',
+  desc = 'Increase window height',
 })
 map('n', '<C-Down>', ':resize -2<CR>', {
-  summary = 'Decrease window height',
+  desc = 'Decrease window height',
 })
 map('n', '<C-Left>', ':vertical resize -2<CR>', {
-  summary = 'Decrease window width',
+  desc = 'Decrease window width',
 })
 map('n', '<C-Right>', ':vertical resize +2<CR>', {
-  summary = 'Increase window width',
+  desc = 'Increase window width',
 })
 
 
 -- Visual --
 -- Stay in indent mode
 map('v', '<', '<gv', {
-  summary = 'Dedent and stay in visual mode',
+  desc = 'Dedent and stay in visual mode',
 })
 map('v', '>', '>gv', {
-  summary = 'Indent and stay in visual mode',
+  desc = 'Indent and stay in visual mode',
 })
 
 -- Move text up and down
 map('v', '<A-j>', ':m .+1<CR>==', {
-  summary = 'Move text down',
+  desc = 'Move text down',
 })
 map('v', '<A-k>', ':m .-2<CR>==', {
-  summary = 'Move text up',
+  desc = 'Move text up',
 })
 map('v', 'p', '"_dP', {
-  summary = 'Paste',
+  desc = 'Paste',
 })
 
 -- Visual Block --
 -- Move text up and down
 map('x', 'J', ":move '>+1<CR>gv-gv", {
-  summary = 'Move text down',
+  desc = 'Move text down',
 })
 map('x', 'K', ":move '<-2<CR>gv-gv", {
-  summary = 'Move text up',
+  desc = 'Move text up',
 })
 map('x', '<A-j>', ":move '>+1<CR>gv-gv", {
-  summary = 'Move text down',
+  desc = 'Move text down',
 })
 map('x', '<A-k>', ":move '<-2<CR>gv-gv", {
-  summary = 'Move text up',
+  desc = 'Move text up',
 })
 
 -- Terminal --
