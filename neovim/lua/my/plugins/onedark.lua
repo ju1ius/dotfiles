@@ -1,6 +1,9 @@
 -- https://github.com/navarasu/onedark.nvim
 
-require('onedark').setup({
+local onedark = require('onedark')
+onedark.setup({
   style = 'dark',
+  -- toggle_style_key = false,
 })
+onedark.load()
 
