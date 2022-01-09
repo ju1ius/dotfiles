@@ -58,3 +58,7 @@ vim.cmd([[
   set background=dark
 ]])
 
+-- search & replace
+if vim.fn.executable('rg') then
+  vim.opt.grepprg = [[rg --vimgrep --smart-case]]
+end

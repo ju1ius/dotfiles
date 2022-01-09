@@ -186,6 +186,10 @@ return packer(function(use)
     setup = [[require('my.plugins.firenvim')]],
     cond = [[vim.g.started_by_firenvim]],
   }
+  -- Search & replace
+  -- TODO: evaluare the following: 
+  -- https://github.com/dyng/ctrlsf.vim
+  -- https://github.com/stefandtw/quickfix-reflector.vim
 
 end)
 
