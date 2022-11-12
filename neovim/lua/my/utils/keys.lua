@@ -24,7 +24,7 @@ end
 
 local function get_default_options(opts)
   local defaults = {silent = true}
-  return vim.tbl_extend('force', defaults, opts)
+  return vim.tbl_extend('force', defaults, opts or {})
 end
 
 local function normalize_modes(modes)
