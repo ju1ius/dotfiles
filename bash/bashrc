@@ -106,6 +106,9 @@ if [ -f ~/.dotfiles/bash/aliases.sh ]; then
   . ~/.dotfiles/bash/aliases.sh
 fi
 
+# Environment variables
+export COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1
+
 if [ -x ~/bin/manpager.sh ]; then
   export MANPAGER=~/bin/manpager.sh
 fi

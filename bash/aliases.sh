@@ -16,12 +16,12 @@ alias lg="lazygit"
 alias git-serve="git daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/"
 
 # docker-compose
-alias dc="docker-compose"
-alias dcb="COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build"
-alias dcx="docker-compose exec"
-alias dcu="docker-compose up -d"
-alias dcd="docker-compose down"
-alias dcl="docker-compose logs"
+alias dc="docker compose"
+alias dcb="COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker compose build"
+alias dcx="docker compose exec"
+alias dcu="docker compose up -d"
+alias dcd="docker compose down"
+alias dcl="docker compose logs"
 
 # aliases for the kitty terminal emulator
 if [[ "${TERM}" = 'xterm-kitty' ]];
