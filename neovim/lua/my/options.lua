@@ -62,3 +62,7 @@ vim.cmd([[
 if vim.fn.executable('rg') then
   vim.opt.grepprg = [[rg --vimgrep --smart-case]]
 end
+
+-- recommended for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

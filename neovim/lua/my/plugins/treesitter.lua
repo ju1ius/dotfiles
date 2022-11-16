@@ -3,7 +3,16 @@ local configs = require('nvim-treesitter.configs')
 
 configs.setup({
   -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = 'maintained',
+  ensure_installed = {
+    'bash', 'c', 'cmake', 'comment', 'cpp',
+    'dockerfile', 'glsl', 'go', 'graphql',
+    'html', 'http', 'java',
+    'javascript', 'jsdoc', 'json', 'json5', 'jsonc',
+    'lua', 'make', 'ninja', 'perl', 'php', 'python',
+    'regex', 'rst', 'ruby', 'rust',
+    'scss', 'supercollider', 'svelte', 'toml', 'tsx', 'typescript',
+    'vim', 'vue', 'yaml', 'zig',
+  },
   -- install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,
   -- List of parsers to ignore installing
