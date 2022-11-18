@@ -4,4 +4,3 @@
 require('my.config')
 -- idem for packer
 require('packer_compiled')
-

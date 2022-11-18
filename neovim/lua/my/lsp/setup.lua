@@ -1,3 +1,5 @@
+local log = require('my.utils.log')
+
 local lspconfig = require('lspconfig')
 local util = require('lspconfig.util')
 local mason = require('mason-lspconfig')
@@ -14,9 +16,9 @@ local capabilities = {
     codeAction = {
       resolveSupport = {
         properties = vim.list_extend(default_capabilities.textDocument.codeAction.resolveSupport.properties, {
-          "documentation",
-          "detail",
-          "additionalTextEdits",
+          'documentation',
+          'detail',
+          'additionalTextEdits',
         }),
       },
     },
@@ -46,16 +48,15 @@ mason.setup({
 
 mason.setup_handlers({
   function(server_name)
-    print('Handling server: ' .. server_name)
+    log.info('Handling server: ' .. server_name)
     local server = lspconfig[server_name]
     local ok, settings = pcall(require, 'my.lsp.settings.' .. server_name)
     if ok then
-      print('Found settings for ' .. server_name)
+      log.info('Found settings for ' .. server_name)
       server.setup(settings)
     else
-      print('No settings found for ' .. server_name)
+      log.info('No settings found for ' .. server_name)
       server.setup({})
     end
   end,
 })
-

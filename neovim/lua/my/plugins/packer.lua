@@ -1,34 +1,36 @@
 -- https://github.com/wbthomason/packer.nvim
 
--- Automatically install packer
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if not vim.loop.fs_stat(install_path) then
-  PACKER_BOOTSTRAP = vim.fn.system({
-    'git', 'clone', '--depth', '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path,
-  })
-  print('Installing packer close and reopen Neovim...')
-  vim.cmd([[packadd packer.nvim]])
+do
+  -- Automatically install packer
+  local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if not vim.loop.fs_stat(install_path) then
+    PACKER_BOOTSTRAP = vim.fn.system({
+      'git', 'clone', '--depth', '1',
+      'https://github.com/wbthomason/packer.nvim',
+      install_path,
+    })
+    print('Installing packer close and reopen Neovim...')
+    vim.cmd([[packadd packer.nvim]])
+  end
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-local filepath = debug.getinfo(1, 'S').source:sub(2)
-local dirname = filepath:match('^(.*)/[^/]+$')
-local reloadCmd = string.format(
-  [[
-    augroup packer_user_config
-      autocmd!
-      autocmd BufWritePost %s/init.lua lua require('my.utils').reload_vimrc()
-    augroup end
-  ]],
-  dirname
-)
-vim.cmd(reloadCmd)
+do
+  -- Autocommand that reloads neovim whenever you save the plugins.lua file
+  local filepath = debug.getinfo(1, 'S').source:sub(2)
+  local dirname = filepath:match('^(.*)/[^/]+$')
+  local group = vim.api.nvim_create_augroup('packer_user_config', {})
+  vim.api.nvim_create_autocmd('BufWritePost', {
+    group = group,
+    pattern = string.format('%s/init.lua', dirname),
+    callback = function(args)
+      require('my.utils').reload_vimrc()
+    end,
+  })
+end
 
 return function(setup)
   -- Use a protected call so we don't error out on first use
-  local status_ok, packer = pcall(require, "packer")
+  local status_ok, packer = pcall(require, 'packer')
   if not status_ok then
     return
   end
@@ -56,4 +58,3 @@ return function(setup)
   end)
 
 end
-

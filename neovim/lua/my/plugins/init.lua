@@ -62,8 +62,7 @@ return packer(function(use)
   -- LSP
   use {
     'neovim/nvim-lspconfig',
-    -- module = 'lspconfig',
-    cond = not_vscode,
+    config = [[require('my.plugins.lsp-setup')('nvim-lspconfig')]],
   }
   use {
     'williamboman/mason.nvim',
@@ -77,7 +76,7 @@ return packer(function(use)
     },
     after = {'nvim-lspconfig', 'mason.nvim'},
     cond = not_vscode,
-    -- config = [[require('my.plugins.mason-lspconfig')]],
+    config = [[require('my.plugins.lsp-setup')('mason-lspconfig')]],
   }
   use {
     'jose-elias-alvarez/null-ls.nvim',
@@ -105,7 +104,10 @@ return packer(function(use)
       {'hrsh7th/cmp-path', after = 'nvim-cmp'}, -- path completions
       {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'}, -- cmdline completions
       {'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'}, -- snippet completions
-      {'hrsh7th/cmp-nvim-lsp', after = {'nvim-cmp', 'nvim-lspconfig'}},
+      {'hrsh7th/cmp-nvim-lsp',
+        after = {'nvim-cmp', 'mason-lspconfig.nvim'},
+        config = [[require('my.plugins.lsp-setup')('cmp-nvim-lsp')]],
+      },
     },
     config = [[require('my.plugins.cmp')]],
     cond = not_vscode,
