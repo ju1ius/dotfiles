@@ -8,6 +8,15 @@ local conf = require('telescope.config').values
 
 local K = require('my.utils.keys')
 
+---@param mapping  Mapping
+---@return string
+local function repr_rhs(mapping)
+  if mapping.opts ~= nil and type(mapping.opts.callback) == 'function' then
+    return '<lua function>'
+  end
+  return mapping.rhs
+end
+
 local function get_preview(entry)
   local lines = {}
   local summary = string.format('" %s', entry.opts.desc)
@@ -31,7 +40,7 @@ local function get_preview(entry)
       '%s %s %s',
       prefix,
       entry.lhs,
-      entry.rhs
+      repr_rhs(entry)
     )
     table.insert(lines, m)
   end
@@ -50,6 +59,8 @@ local function display_entry(entry)
   return value
 end
 
+---@param mapping Mapping
+---@return string|nil
 local function get_ordinal(mapping)
   if not mapping.opts.desc then
     return nil
@@ -87,7 +98,7 @@ local function pick(opts)
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
       end,
     }),
-    attach_mappings = function (prompt_bufnr, map)
+    attach_mappings = function(prompt_bufnr, map)
       actions.select_default:replace(function()
         local selection = action_state.get_selected_entry()
         actions.close(prompt_bufnr)

@@ -48,14 +48,14 @@ mason.setup({
 
 mason.setup_handlers({
   function(server_name)
-    log.info('Handling server: ' .. server_name)
+    -- log.info('Handling server: ' .. server_name)
     local server = lspconfig[server_name]
     local ok, settings = pcall(require, 'my.lsp.settings.' .. server_name)
     if ok then
-      log.info('Found settings for ' .. server_name)
+      -- log.info('Found settings for ' .. server_name)
       server.setup(settings)
     else
-      log.info('No settings found for ' .. server_name)
+      -- log.info('No settings found for ' .. server_name)
       server.setup({})
     end
   end,
