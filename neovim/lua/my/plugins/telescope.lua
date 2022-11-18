@@ -4,8 +4,12 @@ local M = {}
 
 function M.setup()
   local map = require('my.utils.keys').map
-  map('n', '<leader>ff', [[:lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer=false}))<CR>]], {
+  map('n', '<leader>ff', '[lua code]', {
     desc = 'Find file with Telescope',
+    callback = function()
+      local theme = require('telescope.themes').get_dropdown({previewer=false})
+      require('telescope.builtin').find_files(theme)
+    end
   })
   map('n', '<leader>fr', ':Telescope oldfiles<CR>', {
     desc = 'Find recent files',

@@ -85,4 +85,12 @@ function M.get_all(bufnr)
   return vim.list_extend(m, bm)
 end
 
+local augroup = vim.api.nvim_create_augroup('ju1ius_keymaps', {})
+vim.api.nvim_create_autocmd('BufUnload', {
+  callback = function(args)
+    M.clear_buffer(args.buf)
+  end,
+  group = augroup,
+})
+
 return M

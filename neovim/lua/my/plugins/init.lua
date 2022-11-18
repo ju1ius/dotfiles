@@ -21,8 +21,8 @@ return packer(function(use)
   }
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
-     requires = {'nvim-treesitter/nvim-treesitter'},
-     after = 'nvim-treesitter',
+    requires = {'nvim-treesitter/nvim-treesitter'},
+    after = 'nvim-treesitter',
   }
   use {
     'navarasu/onedark.nvim',
@@ -51,30 +51,40 @@ return packer(function(use)
   }
   use {
     'akinsho/bufferline.nvim',
+    tag = 'v3.*',
     requires = {
       {'kyazdani42/nvim-web-devicons'},
-      {'moll/vim-bbye'},
     },
-    wants = {'nvim-web-devicons', 'vim-bbye'},
+    wants = {'nvim-web-devicons'},
     config = [[require('my.plugins.bufferline')]],
     cond = not_vscode,
   }
   -- LSP
   use {
-    'williamboman/nvim-lsp-installer',
+    'neovim/nvim-lspconfig',
+    -- module = 'lspconfig',
+    cond = not_vscode,
+  }
+  use {
+    'williamboman/mason.nvim',
+    cond = not_vscode,
+    config = [[require('my.plugins.mason')]],
+  }
+  use {
+    'williamboman/mason-lspconfig.nvim',
     requires = {
       'neovim/nvim-lspconfig',
     },
-    wants = {'nvim-lspconfig'},
-    config = [[require('my.plugins.lsp-installer')]],
+    after = {'nvim-lspconfig', 'mason.nvim'},
     cond = not_vscode,
+    -- config = [[require('my.plugins.mason-lspconfig')]],
   }
   use {
     'jose-elias-alvarez/null-ls.nvim',
     requires = {
       'neovim/nvim-lspconfig',
     },
-    wants = {'nvim-lspconfig'},
+    after = {'nvim-lspconfig'},
     config = [[require('my.plugins.null-ls')]],
     cond = not_vscode,
   }
@@ -86,24 +96,6 @@ return packer(function(use)
     config = [[require('my.plugins.trouble')]],
     cond = not_vscode,
   }
-  -- Debuggers
-  -- use {
-  --   'mfussenegger/nvim-dap',
-  --   cond = not_vscode,
-  -- }
-  use {
-    'puremourning/vimspector',
-    config = [[require('my.plugins.vimspector')]],
-    cond = not_vscode,
-  }
-  -- snippet engine
-  use {
-    'L3MON4D3/LuaSnip',
-    requires = {
-      'rafamadriz/friendly-snippets',
-    },
-    cond = not_vscode,
-  }
   -- The completion plugin
   use {
     'hrsh7th/nvim-cmp',
@@ -113,15 +105,29 @@ return packer(function(use)
       {'hrsh7th/cmp-path', after = 'nvim-cmp'}, -- path completions
       {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'}, -- cmdline completions
       {'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'}, -- snippet completions
-      {
-        'hrsh7th/cmp-nvim-lsp',
-        config = [[require('my.plugins.cmp-lsp')]],
-        after = {'nvim-cmp', 'nvim-lspconfig'},
-      },
+      {'hrsh7th/cmp-nvim-lsp', after = {'nvim-cmp', 'nvim-lspconfig'}},
     },
     config = [[require('my.plugins.cmp')]],
     cond = not_vscode,
     wants = 'LuaSnip',
+  }
+  -- Debuggers
+  -- use {
+  --   'mfussenegger/nvim-dap',
+  --   cond = not_vscode,
+  -- }
+  -- use {
+  --   'puremourning/vimspector',
+  --   config = [[require('my.plugins.vimspector')]],
+  --   cond = not_vscode,
+  -- }
+  -- snippet engine
+  use {
+    'L3MON4D3/LuaSnip',
+    requires = {
+      'rafamadriz/friendly-snippets',
+    },
+    cond = not_vscode,
   }
   -- Telescope
   use {
@@ -187,9 +193,8 @@ return packer(function(use)
     cond = [[vim.g.started_by_firenvim]],
   }
   -- Search & replace
-  -- TODO: evaluare the following: 
+  -- TODO: evaluare the following:
   -- https://github.com/dyng/ctrlsf.vim
   -- https://github.com/stefandtw/quickfix-reflector.vim
 
 end)
-

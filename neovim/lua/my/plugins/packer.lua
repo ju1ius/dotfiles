@@ -37,11 +37,12 @@ return function(setup)
   packer.init({
     display = {
       open_fn = function()
-        return require('packer.util').float({border = 'rounded'})
+        return require('packer.util').float({border = 'single'})
       end,
     },
     -- Move to lua dir so impatient.nvim can cache it
-    compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua'
+    compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua',
+    log = {level = 'trace'},
   })
 
   -- Install your plugins here

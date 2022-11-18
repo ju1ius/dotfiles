@@ -116,6 +116,49 @@ map('t', '<C-j>', '<C-\\><C-N><C-w>j', term_opts)
 map('t', '<C-k>', '<C-\\><C-N><C-w>k', term_opts)
 map('t', '<C-l>', '<C-\\><C-N><C-w>l', term_opts)
 
+-- Help --
+
+local help_group = vim.api.nvim_create_augroup('help_mappings', {})
+vim.api.nvim_create_autocmd('FileType', {
+  group = help_group,
+  pattern = 'help',
+  -- todo: convert to lua callback
+  command = 'setlocal nonumber',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = help_group,
+  pattern = 'help',
+  callback = function(args)
+    map('n', '<cr>', '<c-]>', {
+      buffer = args.buf,
+      topics = 'help',
+      desc = '<enter> to follow help tags',
+    })
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = help_group,
+  pattern = 'help',
+  callback = function(args)
+    map('n', '<bs>', '<c-T>', {
+      buffer = args.buf,
+      topics = 'help',
+      desc = '<backspace> to navigate back',
+    })
+  end
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = help_group,
+  pattern = 'help',
+  callback = function(args)
+    map('n', 'q', ':q<cr>', {
+      buffer = args.buf,
+      topics = 'help',
+      desc = '<q> to quit help',
+    })
+  end
+})
+
 -- Plugins -
 if vim.g.vscode then
   -- https://open-vsx.org/extension/asvetliakov/vscode-neovim

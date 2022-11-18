@@ -1,27 +1,15 @@
-vim.cmd([[
 
-" ===== Vim help mappings =====
-augroup help_mappings
-  autocmd!
-  " <enter> to follow tag
-  autocmd FileType help nnoremap <buffer><cr> <c-]>
-  " <backspace> to go back
-  autocmd FileType help nnoremap <buffer><bs> <c-T>
-  " <q> to quit
-  autocmd FileType help nnoremap <buffer>q :q<CR>
-  autocmd FileType help setlocal nonumber
-augroup END
+-- per filetype whitespace settings --
 
-" ===== per filetype whitespace settings =====
-augroup ft_tab_sizes
-  autocmd!
-  autocmd FileType php,python setlocal shiftwidth=4 softtabstop=4
-  autocmd FileType make setlocal noexpandtab
-augroup END
+local ws_group = vim.api.nvim_create_augroup('whitespace_settings', {})
+vim.api.nvim_create_autocmd('FileType', {
+  group = ws_group,
+  pattern = {'php', 'python'},
+  command = 'setlocal shiftwidth=4 softtabstop=4',
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = ws_group,
+  pattern = 'make',
+  command = 'setlocal noexpandtab',
+})
 
-augroup ju1ius_keymaps
-  autocmd!
-  autocmd BufUnload * lua require('my.utils.keys').clear_buffer(vim.fn.expand('<abuf>'))
-augroup END
-
-]])
