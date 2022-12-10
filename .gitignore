@@ -13,4 +13,5 @@
 
 /neovim/lua/packer_compiled.lua
 /kitty/local.conf
+/kitty/sessions/*
 
