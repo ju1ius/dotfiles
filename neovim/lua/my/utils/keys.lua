@@ -4,9 +4,24 @@ local M = {}
 
 ---@alias Mode 'n'|'i'|'c'|'v'|'x'|'s'|'o'|'t'|'l'|'!'
 
+---@as table<Mode, string[]>
+local mode_names = {
+  ['n'] = {'normal'},
+  ['i'] = {'insert'},
+  ['v'] = {'visual', 'select'},
+  ['x'] = {'visual'},
+  ['s'] = {'select'},
+  ['c'] = {'command-line'},
+  ['o'] = {'operator-pending'},
+  ['t'] = {'terminal-job'},
+  ['l'] = {'insert', 'command-line', 'lang-arg'},
+  ['!'] = {'insert', 'command-line'}
+}
+
 ---@class Options
 ---@field desc string
 ---@field topic string
+---@field virtual boolean
 ---@field noremap boolean
 ---@field remap boolean
 ---@field silent boolean
@@ -81,8 +96,10 @@ local function register(mapping)
   else
     mappings[h] = mapping
   end
-  local opts = T.pick(nvim_allowed_opts, mapping.opts)
-  vim.keymap.set(mapping.modes, mapping.lhs, mapping.rhs, opts)
+  if not mapping.opts.virtual then
+    local opts = T.pick(nvim_allowed_opts, mapping.opts)
+    vim.keymap.set(mapping.modes, mapping.lhs, mapping.rhs, opts)
+  end
 end
 
 ---Registers a vim key mapping
@@ -107,12 +124,20 @@ end
 function M.unmap(modes, lhs, buffer)
   modes = normalize_modes(modes)
   local h = hash({modes = modes, lhs = lhs})
+  local mapping = nil
   if buffer then
-    buf_mappings[tostring(buffer)][h] = nil
+    local k = tostring(buffer)
+    mapping = buf_mappings[k][h]
+    if mapping then
+      buf_mappings[k][h] = nil
+    end
   else
+    mapping = mappings[h]
     mappings[h] = nil
   end
-  vim.keymap.del(modes, lhs, {buffer = buffer})
+  if mapping and not mapping.opts.virtual then
+    vim.keymap.del(modes, lhs, {buffer = buffer})
+  end
 end
 
 ---Uregisters all registerd mapping for a buffer
@@ -130,6 +155,13 @@ function M.get_all(bufnr)
   local m = vim.tbl_values(mappings)
   local bm = vim.tbl_values(buf_mappings[tostring(bufnr)] or {})
   return vim.list_extend(m, bm)
+end
+
+---Returns the display names of the given mode
+---@param mode Mode
+---@return string[]
+function M.get_mode_names(mode)
+  return mode_names[mode]
 end
 
 local augroup = vim.api.nvim_create_augroup('ju1ius_keymaps', {})

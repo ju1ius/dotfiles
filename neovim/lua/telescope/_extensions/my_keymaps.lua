@@ -11,17 +11,28 @@ local K = require('my.utils.keys')
 ---@param mapping  Mapping
 ---@return string
 local function repr_rhs(mapping)
-  if mapping.opts ~= nil and type(mapping.opts.callback) == 'function' then
+  if mapping.opts and type(mapping.opts.callback) == 'function' then
     return '<lua function>'
   end
   return mapping.rhs
 end
 
+---@param mode Mode
+---@return string
+local function describe_mode(mode)
+  local modes = K.get_mode_names(mode)
+  local is_plural = #modes > 1
+  return table.concat(modes, ', ') .. ' mode' .. (is_plural and 's' or '')
+end
+
+---@param entry Mapping
+---@return string[]
 local function get_preview(entry)
   local lines = {}
   local summary = string.format('" %s', entry.opts.desc)
   table.insert(lines, summary)
   for _, mode in ipairs(entry.modes) do
+    table.insert(lines, '" ' .. describe_mode(mode))
     local prefix = mode
     if entry.opts.noremap then
       prefix = prefix .. 'nore'
@@ -105,8 +116,11 @@ local function pick(opts)
         if selection == nil then
           return
         end
-        local keys = vim.api.nvim_replace_termcodes(selection.value.lhs, true, false, true)
-        vim.api.nvim_feedkeys(keys, 't', true)
+        local mapping = selection.value
+        if not mapping.opts.virtual then
+          local keys = vim.api.nvim_replace_termcodes(selection.value.lhs, true, false, true)
+          vim.api.nvim_feedkeys(keys, 't', true)
+        end
       end)
       return true
     end
