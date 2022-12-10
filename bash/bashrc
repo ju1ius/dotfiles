@@ -29,9 +29,18 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# ----- Standard $PATH setup
+if [[ -d "$HOME/bin" ]]; then
+  PATH="$HOME/bin:$PATH"
+fi
+if [[ -d "$HOME/.local/bin" ]]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+if [[ -d "$HOME/.local/share/man" ]]; then
+  MANPATH="${MANPATH-$(manpath)}:${HOME}/.local/share/man"
+fi
 
+# ----- PROMPT setup
 
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
   # We have color support; assume it's compliant with Ecma-48 (ISO/IEC-6429).
@@ -41,10 +50,13 @@ else
   color_prompt=
 fi
 
-if [[ "$color_prompt" = yes && -f ~/.dotfiles/bash/prompt.sh ]]
+if [[ "$color_prompt" = yes ]] && command -v starship >/dev/null;
 then
-  # We have a custom prompt, use it
-  PROMPT_USE_NERDFONT=1
+  export STARSHIP_CONFIG=~/.dotfiles/starship/config.toml
+  eval "$(starship init bash)"
+elif [[ "$color_prompt" = yes && -f ~/.dotfiles/bash/prompt.sh ]]
+then
+  export PROMPT_USE_NERDFONT=1
   source ~/.dotfiles/bash/prompt.sh
 else
   # Use default debian prompt
@@ -125,17 +137,6 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
-fi
-
-# Custom binaries
-if [[ -d "$HOME/bin" ]]; then
-  PATH="$HOME/bin:$PATH"
-fi
-if [[ -d "$HOME/.local/bin" ]]; then
-  PATH="$HOME/.local/bin:$PATH"
-fi
-if [[ -d "$HOME/.local/share/man" ]]; then
-  MANPATH="${MANPATH-$(manpath)}:${HOME}/.local/share/man"
 fi
 
 # Composer binaries
