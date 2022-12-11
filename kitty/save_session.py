@@ -11,7 +11,7 @@ from typing import Optional
 
 from kitty.boss import Boss
 from kitty.child import parse_environ_block
-from kitty.constants import config_dir as KITTY_CONF_DIR
+from kitty.constants import config_dir as KITTY_CONF_DIR, kitty_exe
 from kittens.tui.handler import result_handler
 from kitty.window import WindowDict
 
@@ -75,13 +75,14 @@ def serialize_session(boss: Boss) -> str:
                 f'new_tab {tab["title"]}',
                 f'layout {tab["layout"]}',
             ])
-            if tab['windows']:
-                cwd = tab['windows'][0]['cwd']
-                lines.append(shlex.join(('cd', cwd)))
-            for win in tab['windows']:
+            windows = (w for w in tab['windows'] if not should_skip_window(w))
+            for win in windows:
+                if should_skip_window(win):
+                    continue
                 args = get_launch_args(win, boss)
                 lines.extend([
                     f'title {win["title"]}',
+                    f'cd {win["cwd"]}',
                     shlex.join(('launch', *args)),
                 ])
                 if win['is_focused']:
@@ -89,22 +90,38 @@ def serialize_session(boss: Boss) -> str:
     return "\n".join(lines)
 
 
+def should_skip_window(win: WindowDict) -> bool:
+    return kitty_exe() in (
+        win['cmdline'][0],
+        win['foreground_processes'][0]['cmdline'][0],
+    )
+
+
 def get_launch_args(win: WindowDict, boss: Boss) -> list[str]:
     '''
     Convert a foreground_processes list to a space separated string.
+
+    Currently we have no way to fetch the user's last entered command,
+    so we have to do guesswork for when /proc/<pid>/cmdline is not the
+    original command (i.e. a wrapper script calling exec, an appimage, flatpak app...)
     '''
     proc = win['foreground_processes'][0]
+    if proc['cmdline'] == win['cmdline']:
+        return win['cmdline']
+    # we have a foreground process that's not the shell itself
     pid, cmd = proc['pid'], proc['cmdline']
     env = get_process_env(pid)
     if appimage := env.get('APPIMAGE'):
         # this is an appimage mountpoint, the real executable is $APPIMAGE
         return [appimage, *cmd[1:]]
-    if cmd[0] == 'bwrap':
-        # looks like a flatpak'ed app:
-        # cmd = ['bwrap', '--args', '42', 'foo', ...args]
-        return get_flatpak_cmd(pid, cmd[4:])
-    return cmd
-
+    match cmd:
+        case ['bwrap', '--args', fd, ns, *args]:
+            # looks like a flatpak app?
+            if result := get_flatpak_cmd(pid, args):
+                return result
+            return cmd
+        case _:
+            return cmd
 
 
 def get_process_env(pid: int) -> dict[str, str]:
@@ -112,7 +129,7 @@ def get_process_env(pid: int) -> dict[str, str]:
         return parse_environ_block(fp.read())
     
 
-def get_flatpak_cmd(cmd_pid: int, args: list[str]) -> list[str]:
+def get_flatpak_cmd(cmd_pid: int, args: list[str]) -> Optional[list[str]]:
     needle = str(cmd_pid)
     cmd = ('flatpak', 'ps', '--columns=pid,child-pid,application')
     proc = subprocess.run(cmd, capture_output=True, encoding='utf-8')
@@ -120,10 +137,7 @@ def get_flatpak_cmd(cmd_pid: int, args: list[str]) -> list[str]:
         pid, cid, appid = line.split()
         if needle in (pid, cid):
             return ['flatpak', 'run', appid, *args]
-    raise RuntimeError(
-        'Could not find appid of flatpak process: '
-        f'{needle} not found in: {proc.stdout}'
-    )
+    return None
 
 
 def env_to_opts(env) -> str:
