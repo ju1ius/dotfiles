@@ -21,6 +21,9 @@
     ~/.config/fontconfig/conf.d/:
       glob: true
       path: fontconfig/*
+    ~/.profile: profile
+    ~/.xsessionrc: xsessionrc
+    ~/.bash_profile: bash/bash_profile
     ~/.bashrc: bash/bashrc
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vim: vim

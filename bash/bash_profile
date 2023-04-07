@@ -1,0 +1,8 @@
+# shellcheck shell=bash
+
+if [[ -e "${HOME}/.profile" ]]; then
+  source "${HOME}/.profile"
+fi
+if [[ -e "${HOME}/.bashrc" ]]; then
+  source "${HOME}/.bashrc"
+fi

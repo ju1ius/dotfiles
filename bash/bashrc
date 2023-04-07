@@ -29,17 +29,6 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-# ----- Standard $PATH setup
-if [[ -d "$HOME/bin" ]]; then
-  PATH="$HOME/bin:$PATH"
-fi
-if [[ -d "$HOME/.local/bin" ]]; then
-  PATH="$HOME/.local/bin:$PATH"
-fi
-if [[ -d "$HOME/.local/share/man" ]]; then
-  MANPATH="${MANPATH-$(manpath)}:${HOME}/.local/share/man"
-fi
-
 # ----- PROMPT setup
 
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -139,34 +128,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Composer binaries
-if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
-  PATH="$HOME/.config/composer/vendor/bin:$PATH"
-fi
-
-# Python binaries
-if [[ -d "$HOME/.pyenv" ]]; then
-  PYENV_ROOT="$HOME/.pyenv"
-  PATH="${PYENV_ROOT}/bin:$PATH"
-  if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-  fi
-fi
-if [[ -d "$HOME/.poetry" ]]; then
-  PATH="$HOME/.poetry/bin:$PATH"
-fi
-
-if [[ -e "$HOME/.local/bin/deno" ]]; then
-  DENO_INSTALL="$HOME/.local"
-fi
-
-# Rust / Rustup
-if [[ -f "${HOME}/.cargo/env" ]]; then
-  source "${HOME}/.cargo/env"
-fi
-
 # fzf
 if [[ -f ~/.fzf.bash ]]; then
   source ~/.fzf.bash
+fi
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi
 
