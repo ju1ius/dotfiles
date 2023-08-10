@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if command -v batcat; then
+if command -v batcat >/dev/null; then
   exec col -bx | batcat -pl man
 else
   exec col -bx | vim \

@@ -111,7 +111,7 @@ fi
 export COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1
 
 if [ -x ~/bin/manpager.sh ]; then
-  export MANPAGER=~/bin/manpager.sh
+  export MANROFFOPT='-c' MANPAGER=~/bin/manpager.sh
 fi
 if [ -x ~/bin/pager.sh ]; then
   export PAGER=~/bin/pager.sh
