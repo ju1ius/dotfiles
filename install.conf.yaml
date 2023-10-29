@@ -26,6 +26,7 @@
     ~/.bash_profile: bash/bash_profile
     ~/.bashrc: bash/bashrc
     ~/.tmux.conf: tmux/tmux.conf
+    ~/.editorconfig: .editorconfig
     ~/.vim: vim
     ~/.vimrc: vim/init.vim
     ~/.config/nvim: neovim
