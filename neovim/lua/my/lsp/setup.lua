@@ -1,8 +1,10 @@
 local log = require('my.utils.log')
 
+require('neoconf').setup({})
+require('neodev').setup({})
+
 local lspconfig = require('lspconfig')
 local util = require('lspconfig.util')
-local mason = require('mason-lspconfig')
 local cmp_lsp = require('cmp_nvim_lsp')
 
 local default_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -33,7 +35,9 @@ util.default_config = vim.tbl_deep_extend('force', util.default_config, {
   ),
 })
 
-mason.setup({
+require('mason').setup()
+local mason_lspconfig = require('mason-lspconfig')
+mason_lspconfig.setup({
   ensure_installed = {
     -- 'bashls',
     -- 'clangd',
@@ -46,11 +50,11 @@ mason.setup({
   },
 })
 
-mason.setup_handlers({
+mason_lspconfig.setup_handlers({
   function(server_name)
     -- log.info('Handling server: ' .. server_name)
     local server = lspconfig[server_name]
-    local ok, settings = pcall(require, 'my.lsp.settings.' .. server_name)
+    local ok, settings = pcall(require, 'my.lsp.servers.' .. server_name)
     if ok then
       -- log.info('Found settings for ' .. server_name)
       server.setup(settings)

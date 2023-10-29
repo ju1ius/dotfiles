@@ -1,8 +1,6 @@
 -- https://github.com/nvim-telescope/telescope.nvim#getting-started
 
-local M = {}
-
-function M.setup()
+local function init()
   local map = require('my.utils.keys').map
   map('n', '<leader>ff', '[lua code]', {
     desc = 'Find file with Telescope',
@@ -28,16 +26,14 @@ function M.setup()
   })
 end
 
-function M.configure()
+local function setup()
   local telescope = require('telescope')
   local actions = require('telescope.actions')
   telescope.setup({
     defaults = {
-
       prompt_prefix = ' ',
       selection_caret = ' ',
       path_display = {'smart'},
-
       mappings = {
         i = {
           ['<C-n>'] = actions.cycle_history_next,
@@ -139,5 +135,15 @@ function M.configure()
 -- telescope.load_extension('media_files')
 end
 
-return M
-
+return {
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {
+      {'nvim-lua/plenary.nvim'},
+      {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
+    },
+    cmd = 'Telescope',
+    init = init,
+    config = setup,
+  },
+}
