@@ -39,6 +39,10 @@ map('', '<leader>P', '"+P', {
   desc = 'Paste from clipboard, insert before',
 })
 
+map('n', 'J', 'mzJ``z', {
+  desc = 'Joins lines. Same as J but keeps the cursor at its original position.',
+})
+
 -- window navigation
 map('n', '<C-h>', '<C-w>h', {
   desc = 'Go to window left',
@@ -84,30 +88,17 @@ map('v', '>', '>gv', {
 })
 
 -- Move text up and down
-map('v', '<A-j>', ':m .+1<CR>==', {
+map('v', 'J', ":move '>+1<CR>gv-gv", {
   desc = 'Move text down',
 })
-map('v', '<A-k>', ':m .-2<CR>==', {
+map('v', 'K', ":move '<-2<CR>gv-gv", {
   desc = 'Move text up',
-})
-map('v', 'p', '"_dP', {
-  desc = 'Paste',
 })
 
--- Visual Block --
--- Move text up and down
-map('x', 'J', ":move '>+1<CR>gv-gv", {
-  desc = 'Move text down',
+map('v', 'p', '"_dP', {
+  desc = 'Paste without overriding the register.',
 })
-map('x', 'K', ":move '<-2<CR>gv-gv", {
-  desc = 'Move text up',
-})
-map('x', '<A-j>', ":move '>+1<CR>gv-gv", {
-  desc = 'Move text down',
-})
-map('x', '<A-k>', ":move '<-2<CR>gv-gv", {
-  desc = 'Move text up',
-})
+
 
 -- Terminal --
 -- window navigation
@@ -163,6 +154,6 @@ vim.api.nvim_create_autocmd('FileType', {
 if vim.g.vscode then
   -- https://open-vsx.org/extension/asvetliakov/vscode-neovim
   -- vim-commentary like mappings
-  map('', 'gc', '<Plug>VSCodeCommentary')
-  map('n', 'gcc', '<Plug>VSCodeCommentaryLine')
+  map('', 'gc', [[<Cmd>call VSCodeCall('editor.action.commentLine')<CR><ESC>]])
+  map('n', 'gcc', [[<Cmd>call VSCodeCall('editor.action.commentLine')<CR><ESC>]])
 end

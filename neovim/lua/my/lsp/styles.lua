@@ -12,8 +12,7 @@ for _, sign in ipairs(signs) do
 end
 
 vim.diagnostic.config({
-  -- disable virtual text
-  virtual_text = false,
+  virtual_text = true,
   -- show signs
   signs = {
     active = signs,
@@ -24,8 +23,8 @@ vim.diagnostic.config({
   float = {
     focusable = false,
     style = 'minimal',
-    border = 'rounded',
-    source = 'always',
+    border = 'solid',
+    source = 'if_many',
     header = '',
     prefix = '',
   },

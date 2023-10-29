@@ -1,6 +1,12 @@
 -- https://github.com/nvim-treesitter/nvim-treesitter
 local configs = require('nvim-treesitter.configs')
 
+local K = require("my.utils.keys")
+K.virtual({'n'}, "<leader>v", {
+  topic = "select",
+  desc = [[Initiate incremental selection, then use +/- to increment/decrement or s to select scope.]]
+})
+
 configs.setup({
   -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = {
@@ -31,10 +37,10 @@ configs.setup({
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      init_selection = "<leader>v",
+      node_incremental = "+",
+      scope_incremental = "s",
+      node_decremental = "-",
     },
   },
   autopairs = {

@@ -95,6 +95,10 @@ return packer(function(use)
     config = [[require('my.plugins.trouble')]],
     cond = not_vscode,
   }
+  use {
+    'j-hui/fidget.nvim',
+    cond = not_vscode,
+  }
   -- The completion plugin
   use {
     'hrsh7th/nvim-cmp',

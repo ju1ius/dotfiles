@@ -19,19 +19,19 @@ local mode_names = {
 }
 
 ---@class Options
----@field desc string
----@field topic string
----@field virtual boolean
----@field noremap boolean
----@field remap boolean
----@field silent boolean
----@field buffer integer
----@field callback function
----@field nowait boolean
----@field script boolean
----@field expr boolean
----@field unique boolean
----@field replace_keycodes boolean
+---@field desc string?
+---@field topic string?
+---@field virtual boolean?
+---@field noremap boolean?
+---@field remap boolean?
+---@field silent boolean?
+---@field buffer integer?
+---@field callback function?
+---@field nowait boolean?
+---@field script boolean?
+---@field expr boolean?
+---@field unique boolean?
+---@field replace_keycodes boolean?
 
 ---@class Mapping
 ---@field modes Mode[]
@@ -65,7 +65,7 @@ local function hash(mapping)
   return string.format('%s|%s', table.concat(mapping.modes, ''), mapping.lhs)
 end
 
----@param opts Options
+---@param opts Options|nil
 ---@return Options
 local function get_default_options(opts)
   local defaults = {silent = true}
@@ -106,7 +106,7 @@ end
 ---@param modes Mode|Mode[]|''
 ---@param lhs string
 ---@param rhs string
----@param opts Options
+---@param opts Options|nil
 function M.map(modes, lhs, rhs, opts)
   local mapping = {
     modes = normalize_modes(modes),
@@ -115,6 +115,16 @@ function M.map(modes, lhs, rhs, opts)
     opts = get_default_options(opts),
   }
   register(mapping)
+end
+
+---Registers a virtual key mapping
+---Use this to document mappings not registerable with using `map()`.
+---@param modes Mode|Mode[]|''
+---@param lhs string
+---@param opts Options|nil
+function M.virtual(modes, lhs, opts)
+  opts = vim.tbl_extend('keep', {virtual = true}, opts or {})
+  M.map(modes, lhs, "", opts)
 end
 
 ---Unregister a key mapping
