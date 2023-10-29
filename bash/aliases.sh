@@ -3,6 +3,8 @@
 alias sudo="sudo -E"
 alias ll="ls -lah"
 alias nv="nvim"
+alias sys="systemctl"
+alias logs="journalctl"
 ##########
 # Git
 ##########
