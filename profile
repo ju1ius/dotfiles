@@ -55,3 +55,7 @@ if [ -d "$HOME/.bun" ]; then
   BUN_INSTALL="$HOME/.bun"
   PATH="$BUN_INSTALL/bin:$PATH"
 fi
+
+if [ -f "${HOME}/.env" ]; then
+  . "${HOME}/.env"
+fi
