@@ -1,4 +1,6 @@
+# https://docs.npmjs.com/cli/v10/configuring-npm/npmrc
+
 prefix=${HOME}/.local
+//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
 
 yoga-layout:platform=standalone
-
