@@ -33,9 +33,11 @@ local mode_names = {
 ---@field unique boolean?
 ---@field replace_keycodes boolean?
 
----@class Mapping
+---@class MappingBase
 ---@field modes Mode[]
 ---@field lhs string
+
+---@class Mapping: MappingBase
 ---@field rhs string
 ---@field opts Options
 
@@ -59,7 +61,7 @@ local nvim_allowed_opts = {
   'replace_keycodes',
 }
 
----@param mapping Mapping
+---@param mapping MappingBase
 ---@return string
 local function hash(mapping)
   return string.format('%s|%s', table.concat(mapping.modes, ''), mapping.lhs)
