@@ -17,7 +17,7 @@ return {
     -- https://github.com/nvim-lualine/lualine.nvim
     'nvim-lualine/lualine.nvim',
     dependencies = {
-      {'kyazdani42/nvim-web-devicons'},
+      {'nvim-tree/nvim-web-devicons'},
     },
     config = function(plugin, opts)
       require('lualine').setup({
@@ -46,7 +46,7 @@ return {
     -- https://github.com/akinsho/bufferline.nvim#configuration
     'akinsho/bufferline.nvim',
     dependencies = {
-      {'kyazdani42/nvim-web-devicons'},
+      {'nvim-tree/nvim-web-devicons'},
     },
     config = function(plugin, opts)
       require('bufferline').setup({
@@ -70,10 +70,10 @@ return {
     end,
   },
   {
-    -- https://github.com/kyazdani42/nvim-tree.lua
-    'kyazdani42/nvim-tree.lua',
+    -- https://github.com/nvim-tree/nvim-tree.lua
+    'nvim-tree/nvim-tree.lua',
     dependencies = {
-      {'kyazdani42/nvim-web-devicons'},
+      {'nvim-tree/nvim-web-devicons'},
     },
     cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},
     init = function()
