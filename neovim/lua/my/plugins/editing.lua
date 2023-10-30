@@ -40,6 +40,7 @@ return {
         scope = {
           enabled = true,
           char = '▏',
+          show_start = false,
         },
         exclude = {
           buftypes = {'terminal', 'no_file'},
