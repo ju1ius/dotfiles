@@ -104,7 +104,7 @@ local function pick(opts)
       --   require('telescope.previewers.utils').highlighter(self.state.bufnr, 'vim')
       -- end,
       define_preview = function(self, entry, status)
-        vim.api.nvim_buf_set_option(self.state.bufnr, 'filetype', 'vim')
+        vim.api.nvim_set_option_value('filetype', 'vim', {buf = self.state.bufnr})
         local lines = get_preview(entry.value)
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
       end,
