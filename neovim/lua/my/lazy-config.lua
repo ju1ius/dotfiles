@@ -31,7 +31,12 @@ require('lazy').setup({
     end,
   },
   checker = {
-    enabled = true,
+    enabled = not vim.g.vscode,
     frequency = 3600 * 4,
   },
+  change_detection = {
+    enabled = not vim.g.vscode,
+  },
 })
+
+require('my.utils.keys').register_lazy_keys()
