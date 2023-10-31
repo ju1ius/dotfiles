@@ -26,7 +26,10 @@ return {
     end,
   },
   {
+    -- https://github.com/machakann/vim-sandwich
+    -- TODO: check https://github.com/echasnovski/mini.surround
     'machakann/vim-sandwich',
+    vscode = true,
   },
   {
     -- https://github.com/lukas-reineke/indent-blankline.nvim
