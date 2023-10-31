@@ -1,17 +1,5 @@
 local map = require('my.utils.keys').map
 
-local function not_utf8()
-  return vim.opt.fileencoding:get() ~= 'utf-8'
-end
-
-local function format_is_not_unix()
-  return vim.bo.fileformat ~= 'unix'
-end
-
-local function progress()
-  return '%3p%%/%L'
-end
-
 return {
   {
     -- https://github.com/nvim-lualine/lualine.nvim
@@ -20,26 +8,7 @@ return {
       {'nvim-tree/nvim-web-devicons'},
     },
     config = function(plugin, opts)
-      require('lualine').setup({
-        options = {
-          theme = 'onedark',
-          disabled_filetypes = {
-            'NvimTree',
-          },
-        },
-        sections = {
-          lualine_a = {'mode'},
-          lualine_b = {'branch', 'diff', 'diagnostics'},
-          lualine_c = {'filename'},
-          lualine_x = {
-            {'encoding', cond = not_utf8},
-            {'fileformat', cond = format_is_not_unix},
-            'filetype',
-          },
-          lualine_y = {progress},
-          lualine_z = {'location'}
-        },
-      })
+      require('my.plugins.ui.lualine')()
     end,
   },
   {
