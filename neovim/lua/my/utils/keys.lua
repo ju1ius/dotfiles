@@ -181,14 +181,15 @@ end
 --Registers virtual mappings for each key entry in lazy.vim plugin specs.
 function M.register_lazy_keys()
   local lazy_config = require('lazy.core.config')
-  local lazy_allowed = vim.list_slice(nvim_allowed_opts)
-  vim.list_extend(lazy_allowed, {1, 2, 'mode', 'lhs', 'ft'})
+  local lazy_allowed = {'id', 'lhs', 'rhs', 'mode', 'ft'}
+  vim.list_extend(lazy_allowed, nvim_allowed_opts)
+
   for _, plugin in pairs(lazy_config.plugins) do
-    -- dump(plugin)
     local keys = vim.tbl_get(plugin or {}, '_', 'handlers', 'keys') or {}
     for _, keymap in pairs(keys) do
       if keymap.desc and #keymap.desc > 0 then
         M.virtual(keymap.mode, keymap.lhs, keymap)
+        -- filter-out additional options
         T.keep(lazy_allowed, keymap)
       end
     end

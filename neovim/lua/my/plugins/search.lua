@@ -1,6 +1,12 @@
 return {
   -- Search & replace
-  -- TODO: evaluare the following:
-  -- https://github.com/dyng/ctrlsf.vim
-  -- https://github.com/stefandtw/quickfix-reflector.vim
+  {
+    -- https://github.com/nvim-pack/nvim-spectre
+    'nvim-pack/nvim-spectre',
+    cmd = 'Spectre',
+    opts = { open_cmd = 'noswapfile vnew' },
+    keys = {
+      { '<leader>sr', function() require('spectre').open() end, desc = 'Replace in files (Spectre)' },
+    },
+  }
 }
