@@ -139,10 +139,13 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
-      {'nvim-lua/plenary.nvim'},
+      {'nvim-lua/plenary.nvim', cond = true},
       {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
     },
     cmd = 'Telescope',
+    keys = {
+      {'<leader>tel', ':Telescope', desc = 'Lanch Telescope', topic = 'telescope,search'},
+    },
     init = init,
     config = setup,
   },

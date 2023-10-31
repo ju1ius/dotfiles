@@ -3,6 +3,7 @@ local M = {}
 ---@alias Key string
 ---@alias Value any
 
+--Returns a new table containing only the provided keys.
 ---@generic K: Key, V: Value
 ---@param keys K[]
 ---@param t table<K, `V`>
@@ -13,6 +14,19 @@ function M.pick(keys, t)
     result[key] = t[key]
   end
   return result
+end
+
+--Like [Self.pick] but modifies the table in-place
+---@generic K: Key, V: Value
+---@param keys K[]
+---@param t table<K, `V`>
+function M.keep(keys, t)
+  local lookup = M.to_lookup(keys)
+  for key, _ in pairs(t) do
+    if lookup[key] == nil then
+      t[key] = nil
+    end
+  end
 end
 
 local function count(t, iter)
@@ -31,6 +45,14 @@ end
 ---@return number
 function M.icount(t)
   return count(t, ipairs)
+end
+
+function M.to_lookup(t)
+  local result = {}
+  for _, value in ipairs(t) do
+    result[value] = true
+  end
+  return result
 end
 
 return M

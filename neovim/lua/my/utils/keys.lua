@@ -1,4 +1,6 @@
 local T = require('my.utils.tables')
+local log = require("my.utils.log")
+local dump = require("my.utils.log").dump
 
 local M = {}
 
@@ -174,6 +176,23 @@ end
 ---@return string[]
 function M.get_mode_names(mode)
   return mode_names[mode]
+end
+
+--Registers virtual mappings for each key entry in lazy.vim plugin specs.
+function M.register_lazy_keys()
+  local lazy_config = require('lazy.core.config')
+  local lazy_allowed = vim.list_slice(nvim_allowed_opts)
+  vim.list_extend(lazy_allowed, {1, 2, 'mode', 'lhs', 'ft'})
+  for _, plugin in pairs(lazy_config.plugins) do
+    -- dump(plugin)
+    local keys = vim.tbl_get(plugin or {}, '_', 'handlers', 'keys') or {}
+    for _, keymap in pairs(keys) do
+      if keymap.desc and #keymap.desc > 0 then
+        M.virtual(keymap.mode, keymap.lhs, keymap)
+        T.keep(lazy_allowed, keymap)
+      end
+    end
+  end
 end
 
 local augroup = vim.api.nvim_create_augroup('ju1ius_keymaps', {})
