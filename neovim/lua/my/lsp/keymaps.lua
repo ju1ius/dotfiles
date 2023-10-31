@@ -66,9 +66,23 @@ local function set_buf_keymaps(bufnr)
     topic = 'lsp',
     desc = 'Format document',
   })
-  vim.cmd([[
-    command! Format execute 'lua vim.lsp.buf.formatting()'
-  ]])
+
+  vim.api.nvim_buf_create_user_command(
+    bufnr,
+    'Format',
+    function()
+      vim.lsp.buf.format({buffer = bufnr})
+    end,
+    {desc = '[lsp] Format document'}
+  )
+  vim.api.nvim_buf_create_user_command(
+    bufnr,
+    'LspDebug',
+    function()
+      require('my.utils.log').dump(vim.lsp.get_clients({buffer = bufnr}))
+    end,
+    { desc = '[lsp] Dump LSP client configuration' }
+  )
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
