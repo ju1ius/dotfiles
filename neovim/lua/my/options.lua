@@ -52,11 +52,10 @@ vim.opt.belloff = 'all'
 if vim.fn.has('termguicolors') and not os.getenv('TMUX') then
   vim.opt.termguicolors = true
 end
+
 -- sets a default colorscheme
-vim.cmd([[
-  colorscheme default
-  set background=dark
-]])
+vim.cmd.colorscheme('default')
+vim.opt.background = 'dark'
 
 -- search & replace
 if vim.fn.executable('rg') then

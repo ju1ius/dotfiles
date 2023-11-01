@@ -153,7 +153,14 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Plugins -
 if vim.g.vscode then
   -- https://open-vsx.org/extension/asvetliakov/vscode-neovim
+  local vscode = require('vscode-neovim')
   -- vim-commentary like mappings
-  map('', 'gc', [[<Cmd>call VSCodeCall('editor.action.commentLine')<CR><ESC>]])
-  map('n', 'gcc', [[<Cmd>call VSCodeCall('editor.action.commentLine')<CR><ESC>]])
+  local function comment_line()
+    vscode.call('editor.action.commentLine')
+  end
+  map('', 'gc', comment_line)
+  map('n', 'gcc', comment_line)
+  map('n', '<leader>ff', function()
+    vscode.notify('workbench.action.findInFiles')
+  end)
 end
