@@ -2,6 +2,9 @@
 --
 -- https://puremourning.github.io/vimspector
 
+-- vimspector is disabled
+if true then return {} end
+
 local map = require('my.utils.keys').map
 
 local M = {}
