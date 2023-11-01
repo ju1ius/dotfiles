@@ -1,5 +1,6 @@
 return {
   {
+    -- https://github.com/hrsh7th/nvim-cmp
     'hrsh7th/nvim-cmp',
     dependencies = {
       'L3MON4D3/LuaSnip',
@@ -10,6 +11,7 @@ return {
       'saadparwaiz1/cmp_luasnip', -- snippet completions
       'hrsh7th/cmp-nvim-lsp',
     },
+    event = { 'InsertEnter' },
     config = function(plugin, opts)
       -- https://github.com/hrsh7th/nvim-cmp
       local cmp = require('cmp')
@@ -17,8 +19,7 @@ return {
       require('luasnip/loaders/from_vscode').lazy_load()
       local map = require('my.utils.keys').map
 
-      map({'i', 'c'}, '<C-Space>', '<virtual>', {
-        virtual = true,
+      map({ 'i', 'c' }, '<C-Space>', nil, {
         topic = 'cmp',
         desc = 'trigger autocompletion dropdown',
       })
@@ -65,40 +66,33 @@ return {
           end,
         },
         sources = cmp.config.sources({
-          {name = 'nvim_lsp'},
-          {name = 'nvim_lua'},
-          {name = 'luasnip'},
-          {name = 'buffer'},
-          {name = 'path'},
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'path' },
+        }, {
+          { name = 'buffer' },
         }),
         mapping = {
           ['<C-k>'] = cmp.mapping.select_prev_item(),
           ['<C-j>'] = cmp.mapping.select_next_item(),
-          ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), {'i', 'c'}),
-          ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), {'i', 'c'}),
-          ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
+          ['<C-u>'] = cmp.mapping.scroll_docs(-1),
+          ['<C-d>'] = cmp.mapping.scroll_docs(1),
+          ['<C-Space>'] = cmp.mapping.complete(),
           -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
           ['<C-y>'] = cmp.config.disable,
-          ['<C-e>'] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-          }),
+          ['<C-e>'] = cmp.mapping.abort(),
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
-          ['<CR>'] = cmp.mapping.confirm({select = true}),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
-            elseif check_backspace() then
-              fallback()
             else
               fallback()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
@@ -107,17 +101,16 @@ return {
             else
               fallback()
             end
-          end, {'i', 's'}),
+          end, { 'i', 's' }),
         },
         formatting = {
-          fields = {'kind', 'abbr', 'menu'},
+          fields = { 'kind', 'abbr', 'menu' },
           format = function(entry, vim_item)
             -- Kind icons
             vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
             -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             vim_item.menu = ({
               nvim_lsp = '[lsp]',
-              nvim_lua = '[nvim]',
               luasnip = '[snip]',
               buffer = '[buf]',
               path = '[path]',
@@ -128,13 +121,6 @@ return {
         confirm_opts = {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
-        },
-        window = {
-          documentation = cmp.config.window.bordered(),
-        },
-        experimental = {
-          ghost_text = false,
-          native_menu = false,
         },
       })
     end,

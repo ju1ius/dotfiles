@@ -2,14 +2,14 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
+      { 'folke/neoconf.nvim', cmd = 'Neoconf', config = false, dependencies = { 'nvim-lspconfig' } },
+      { 'folke/neodev.nvim', opts = {} },
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      {"folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = {"nvim-lspconfig"}},
-      {"folke/neodev.nvim", opts = {}},
     },
     config = function()
       require('my.lsp')
-    end
+    end,
   },
   {
     'jose-elias-alvarez/null-ls.nvim',
@@ -29,10 +29,10 @@ return {
   {
     'folke/trouble.nvim',
     dependencies = {
-      {'kyazdani42/nvim-web-devicons'},
+      { 'kyazdani42/nvim-web-devicons' },
     },
-    cmd = {'TroubleToggle'},
-    init = function ()
+    cmd = { 'TroubleToggle' },
+    init = function()
       local map = require('my.utils.keys').map
       map('n', '<leader>td', ':TroubleToggle<CR>', {
         topic = 'lsp',

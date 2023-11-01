@@ -19,11 +19,12 @@ return {
       },
     },
     build = ':TSUpdate',
+    event = {'VeryLazy'},
     config = function(plugin, opts)
       local configs = require('nvim-treesitter.configs')
       local K = require("my.utils.keys")
 
-      K.virtual({'n'}, "<leader>v", {
+      K.map({'n'}, "<leader>v", nil, {
         topic = "select",
         desc = [[Initiate incremental selection, then use +/- to increment/decrement or s to select scope.]]
       })

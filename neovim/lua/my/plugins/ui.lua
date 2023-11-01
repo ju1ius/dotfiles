@@ -5,7 +5,7 @@ return {
     -- https://github.com/nvim-lualine/lualine.nvim
     'nvim-lualine/lualine.nvim',
     dependencies = {
-      {'nvim-tree/nvim-web-devicons'},
+      { 'nvim-tree/nvim-web-devicons' },
     },
     config = function(plugin, opts)
       require('my.plugins.ui.lualine')()
@@ -15,12 +15,12 @@ return {
     -- https://github.com/akinsho/bufferline.nvim#configuration
     'akinsho/bufferline.nvim',
     dependencies = {
-      {'nvim-tree/nvim-web-devicons'},
+      { 'nvim-tree/nvim-web-devicons' },
     },
     config = function(plugin, opts)
       require('bufferline').setup({
         options = {
-          indicator = {style = 'underline'},
+          indicator = { style = 'underline' },
           hover = {
             enabled = true,
           },
@@ -51,9 +51,9 @@ return {
     -- https://github.com/nvim-tree/nvim-tree.lua
     'nvim-tree/nvim-tree.lua',
     dependencies = {
-      {'nvim-tree/nvim-web-devicons'},
+      { 'nvim-tree/nvim-web-devicons' },
     },
-    cmd = {'NvimTreeToggle', 'NvimTreeFindFileToggle'},
+    cmd = { 'NvimTreeToggle', 'NvimTreeFindFileToggle' },
     init = function()
       map('n', '<leader>te', ':NvimTreeFindFileToggle<CR>', {
         desc = 'Toggle file explorer',
@@ -67,7 +67,7 @@ return {
         view = {},
         renderer = {
           highlight_git = true,
-          highlight_opened_files = "icon",
+          highlight_opened_files = 'icon',
           icons = {
             glyphs = {
               -- default = '',
@@ -94,8 +94,8 @@ return {
             },
           },
         },
-        on_attach = function (bufno)
-          local api = require 'nvim-tree.api'
+        on_attach = function(bufno)
+          local api = require('nvim-tree.api')
           api.config.mappings.default_on_attach(bufno)
           map('n', '+', '', {
             buffer = bufno,
@@ -115,14 +115,17 @@ return {
             topic = 'nvim-tree',
             callback = api.tree.run_file_command,
           })
-        end
+        end,
       })
     end,
   },
   {
     -- https://github.com/mbbill/undotree
     'mbbill/undotree',
-    cmd = 'UndotreeToggle',
+    cmd = { 'UndotreeToggle' },
+    keys = {
+      { '<leader>tu', ':UndotreeToggle<CR>', desc = 'Toggle undo tree panel' },
+    },
     init = function()
       -- focus undotree window on open
       vim.g.undotree_SetFocusWhenToggle = true
@@ -132,13 +135,6 @@ return {
       -- 3: tree right, diff right
       -- 4: tree right, diff below
       vim.g.undotree_WindowLayout = 3
-
-      local map = require('my.utils.keys').map
-      map('n', '<leader>tu', ':UndotreeToggle<CR>', {
-        topic = 'undo',
-        desc = 'Toggles undo tree panel.',
-      })
     end,
-    config = function(plugin, opts) end,
   },
 }
