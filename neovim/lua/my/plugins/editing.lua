@@ -43,7 +43,8 @@ return {
         scope = {
           enabled = true,
           char = '▏',
-          show_start = false,
+          -- show_start = false,
+          highlight = 'Whitespace',
         },
         exclude = {
           buftypes = {'terminal', 'no_file'},
