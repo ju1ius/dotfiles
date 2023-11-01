@@ -21,7 +21,7 @@ local function set_buf_keymaps(bufnr)
     topic = 'lsp',
     desc = 'Go to implementations',
   })
-  K.map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {
+  K.map({'n', 'i'}, '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {
     buffer = bufnr,
     topic = 'lsp',
     desc = 'Show signature',
