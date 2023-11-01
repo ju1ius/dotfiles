@@ -1,29 +1,29 @@
 local T = require('my.utils.tables')
-local log = require("my.utils.log")
-local dump = require("my.utils.log").dump
+local log = require('my.utils.log')
+local dump = require('my.utils.log').dump
 
 local M = {}
 
 ---@alias Mode 'n'|'i'|'c'|'v'|'x'|'s'|'o'|'t'|'l'|'!'
+---@alias Modes Mode|Mode[]|''
 
 ---@as table<Mode, string[]>
 local mode_names = {
-  ['n'] = {'normal'},
-  ['i'] = {'insert'},
-  ['v'] = {'visual', 'select'},
-  ['x'] = {'visual'},
-  ['s'] = {'select'},
-  ['c'] = {'command-line'},
-  ['o'] = {'operator-pending'},
-  ['t'] = {'terminal-job'},
-  ['l'] = {'insert', 'command-line', 'lang-arg'},
-  ['!'] = {'insert', 'command-line'}
+  ['n'] = { 'normal' },
+  ['i'] = { 'insert' },
+  ['v'] = { 'visual', 'select' },
+  ['x'] = { 'visual' },
+  ['s'] = { 'select' },
+  ['c'] = { 'command-line' },
+  ['o'] = { 'operator-pending' },
+  ['t'] = { 'terminal-job' },
+  ['l'] = { 'insert', 'command-line', 'lang-arg' },
+  ['!'] = { 'insert', 'command-line' },
 }
 
 ---@class Options
 ---@field desc string?
 ---@field topic string?
----@field virtual boolean?
 ---@field noremap boolean?
 ---@field remap boolean?
 ---@field silent boolean?
@@ -40,7 +40,7 @@ local mode_names = {
 ---@field lhs string
 
 ---@class Mapping: MappingBase
----@field rhs string
+---@field rhs string?
 ---@field opts Options
 
 ---@type table<string, Mapping>
@@ -51,6 +51,7 @@ local buf_mappings = {}
 
 -- options accepted by vim.keymap.set()
 local nvim_allowed_opts = {
+  'buffer',
   'noremap',
   'remap',
   'silent',
@@ -72,17 +73,17 @@ end
 ---@param opts Options|nil
 ---@return Options
 local function get_default_options(opts)
-  local defaults = {silent = true}
+  local defaults = { silent = true }
   return vim.tbl_extend('force', defaults, opts or {})
 end
 
----@param modes Mode|Mode[]|''
+---@param modes Modes
 ---@return Mode[]
 local function normalize_modes(modes)
   if modes == '' then
-    modes = {'n', 'v', 'o'}
+    modes = { 'n', 'v', 'o' }
   elseif type(modes) ~= 'table' then
-    modes = {modes}
+    modes = { modes }
   end
   return modes
 end
@@ -100,16 +101,20 @@ local function register(mapping)
   else
     mappings[h] = mapping
   end
-  if not mapping.opts.virtual then
+  if not M.is_virtual(mapping) then
     local opts = T.pick(nvim_allowed_opts, mapping.opts)
-    vim.keymap.set(mapping.modes, mapping.lhs, mapping.rhs, opts)
+    vim.keymap.set(mapping.modes, mapping.lhs, mapping.rhs or '', opts)
   end
 end
 
----Registers a vim key mapping
----@param modes Mode|Mode[]|''
+---Registers a vim key mapping.
+---
+--- If both `rhs` and `opts.callback` are `nil`,
+--- the mapping is considered "virtual":
+--- it is not registered but kept for documentation purposes.
+---@param modes Modes
 ---@param lhs string
----@param rhs string
+---@param rhs string|function|nil
 ---@param opts Options|nil
 function M.map(modes, lhs, rhs, opts)
   local mapping = {
@@ -121,23 +126,25 @@ function M.map(modes, lhs, rhs, opts)
   register(mapping)
 end
 
----Registers a virtual key mapping
----Use this to document mappings not registerable with using `map()`.
----@param modes Mode|Mode[]|''
----@param lhs string
----@param opts Options|nil
-function M.virtual(modes, lhs, opts)
-  opts = vim.tbl_extend('keep', {virtual = true}, opts or {})
-  M.map(modes, lhs, "", opts)
+---@param mapping Mapping
+---@return boolean
+function M.is_virtual(mapping)
+  return not mapping.rhs and not mapping.opts.callback
+end
+
+---@param mapping Mapping
+---@return boolean
+function M.is_function(mapping)
+  return type(mapping.rhs) == 'function' or type(mapping.opts.callback) == 'function'
 end
 
 ---Unregister a key mapping
----@param modes Mode|Mode[]|''
+---@param modes Modes
 ---@param lhs string
 ---@param buffer number|nil
 function M.unmap(modes, lhs, buffer)
   modes = normalize_modes(modes)
-  local h = hash({modes = modes, lhs = lhs})
+  local h = hash({ modes = modes, lhs = lhs })
   local mapping = nil
   if buffer then
     local k = tostring(buffer)
@@ -149,8 +156,8 @@ function M.unmap(modes, lhs, buffer)
     mapping = mappings[h]
     mappings[h] = nil
   end
-  if mapping and not mapping.opts.virtual then
-    vim.keymap.del(modes, lhs, {buffer = buffer})
+  if mapping and not M.is_virtual(mapping) then
+    vim.keymap.del(modes, lhs, { buffer = buffer })
   end
 end
 
@@ -181,14 +188,15 @@ end
 --Registers virtual mappings for each key entry in lazy.vim plugin specs.
 function M.register_lazy_keys()
   local lazy_config = require('lazy.core.config')
-  local lazy_allowed = {'id', 'lhs', 'rhs', 'mode', 'ft'}
+  local lazy_allowed = { 'id', 'lhs', 'rhs', 'mode', 'ft' }
   vim.list_extend(lazy_allowed, nvim_allowed_opts)
 
   for _, plugin in pairs(lazy_config.plugins) do
     local keys = vim.tbl_get(plugin or {}, '_', 'handlers', 'keys') or {}
     for _, keymap in pairs(keys) do
       if keymap.desc and #keymap.desc > 0 then
-        M.virtual(keymap.mode, keymap.lhs, keymap)
+        local opts = vim.tbl_extend('force', {}, keymap, { callback = nil })
+        M.map(keymap.mode, keymap.lhs, nil, opts)
         -- filter-out additional options
         T.keep(lazy_allowed, keymap)
       end

@@ -2,5 +2,6 @@
   "python.analysis.autoImportCompletions": false,
   "python.analysis.extraPaths": [
     "/usr/lib/kitty"
-  ]
+  ],
+  "Lua.codeLens.enable": true
 }

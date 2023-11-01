@@ -11,8 +11,20 @@ local K = require('my.utils.keys')
 ---@param mapping  Mapping
 ---@return string
 local function repr_rhs(mapping)
-  if mapping.opts and type(mapping.opts.callback) == 'function' then
-    return '<lua function>'
+  if K.is_virtual(mapping) then
+    -- try to get a repr from vim keymap
+    for _, mode in ipairs(mapping.modes) do
+      local rhs = vim.fn.maparg(mapping.lhs, mode)
+      if rhs ~= '' then return rhs end
+    end
+    return '<virtual>'
+  end
+  if K.is_function(mapping) then
+    for _, mode in ipairs(mapping.modes) do
+      local rhs = vim.fn.maparg(mapping.lhs, mode)
+      if rhs ~= '' then return rhs end
+    end
+    return '<Lua: unknown>'
   end
   return mapping.rhs
 end
@@ -25,11 +37,27 @@ local function describe_mode(mode)
   return table.concat(modes, ', ') .. ' mode' .. (is_plural and 's' or '')
 end
 
+---Returns the ordinal form of the mapping description.
+---@param desc string
+---@return string
+local function desc_to_ordinal(desc)
+  local s, _ = string.gsub(desc, '^%[([%w%p]-)%]', '%1', 1)
+  return s
+end
+
+---Removes the topic annotation from the mapping description.
+---@param desc string
+---@return string
+local function strip_topic(desc)
+  local s, _ = string.gsub(desc, '^%[([%w%p]-)%]%s*', '', 1)
+  return s
+end
+
 ---@param entry Mapping
 ---@return string[]
 local function get_preview(entry)
   local lines = {}
-  local summary = string.format('" %s', entry.opts.desc)
+  local summary = string.format('" %s', strip_topic(entry.opts.desc))
   table.insert(lines, summary)
   for _, mode in ipairs(entry.modes) do
     table.insert(lines, '" ' .. describe_mode(mode))
@@ -78,9 +106,9 @@ local function get_ordinal(mapping)
   end
   local value = ''
   if mapping.opts.topic then
-    value = mapping.opts.topic
+    value = mapping.opts.topic .. ' '
   end
-  return value .. ' ' .. mapping.opts.desc
+  return value .. desc_to_ordinal(mapping.opts.desc)
 end
 
 local function pick(opts)
@@ -117,7 +145,7 @@ local function pick(opts)
           return
         end
         local mapping = selection.value
-        if not mapping.opts.virtual then
+        if not K.is_virtual(mapping) then
           local keys = vim.api.nvim_replace_termcodes(selection.value.lhs, true, false, true)
           vim.api.nvim_feedkeys(keys, 't', true)
         end
