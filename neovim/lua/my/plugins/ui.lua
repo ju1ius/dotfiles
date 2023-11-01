@@ -24,6 +24,15 @@ return {
           hover = {
             enabled = true,
           },
+          buffer_close_icon = '✗',
+          offsets = {
+            {
+              filetype = 'NvimTree',
+              text = 'Explorer',
+              highlight = 'Directory',
+              separator = false, -- use a "true" to enable the default, or set your own character
+            },
+          },
         },
       })
       map('n', '<C-tab>', '<Cmd>BufferLineCycleNext<CR>', {
