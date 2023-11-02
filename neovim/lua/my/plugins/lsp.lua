@@ -1,3 +1,5 @@
+-- Stuff to check:
+-- LspSaga: https://nvimdev.github.io/lspsaga
 return {
   {
     -- https://github.com/neovim/nvim-lspconfig

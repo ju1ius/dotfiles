@@ -31,7 +31,7 @@ return {
 
       configs.setup({
         -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-        -- stylua: ignore start
+        -- stylua: ignore
         ensure_installed = {
           'bash', 'c', 'cmake', 'comment', 'cpp',
           'dockerfile', 'glsl', 'go', 'graphql',
@@ -42,7 +42,6 @@ return {
           'scss', 'supercollider', 'svelte', 'toml', 'tsx', 'typescript',
           'vim', 'vue', 'yaml', 'zig',
         },
-        -- stylua: ignore end
         -- install languages synchronously (only applied to `ensure_installed`)
         sync_install = false,
         -- List of parsers to ignore installing
