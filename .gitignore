@@ -3,12 +3,11 @@
 *.old
 *.bak
 
+/vim/autoload/plug.vim
 /vim/plugged/*
 !/vim/plugged/.gitkeep
-/vim/backup/*
-!/vim/backup/.gitkeep
-/vim/swap/*
-!/vim/swap/.gitkeep
+/vim/backup
+/vim/swap
 /vim/.netrwhist
 
 /kitty/local.conf

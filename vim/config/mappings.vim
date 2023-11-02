@@ -1,5 +1,5 @@
 let mapleader="\<Space>"
-let maplocalleader=";"
+let maplocalleader="\<Space>"
 nnoremap <Space> <Nop>
 
 " yank & paste to clipboard

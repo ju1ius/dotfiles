@@ -1,24 +1,24 @@
 " auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  "autocmd VimEnter * PlugInstall
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/0.11.0/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
 
+" ----- Colors
+Plug 'joshdick/onedark.vim'
+Plug 'ryanoasis/vim-devicons'
+" ----- Statusline
+Plug 'itchyny/lightline.vim'
+" ----- Explorer
+Plug 'scrooloose/nerdtree'
+
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-
-Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-commentary'
-Plug 'scrooloose/nerdtree'
-Plug 'mileszs/ack.vim'
-Plug 'junegunn/fzf',  {'dir': '~/bin/fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
-
 Plug 'christoomey/vim-system-copy'
 " ------- Pairs
 " Auto closes pairs (see also the lexima plugin for an alternative)
@@ -26,10 +26,9 @@ Plug 'jiangmiao/auto-pairs'
 " Smart selection inside pairs (vv, then v to expand or Ctrl+Shift+v to reduce)
 Plug 'gorkunov/smartpairs.vim'
 
-" ----- Colors
-Plug 'joshdick/onedark.vim'
-" ----- Statusline
-Plug 'itchyny/lightline.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'junegunn/fzf',  {'dir': '~/bin/fzf', 'do': './install --all'} | Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 
 " ----- VCS
 Plug 'tpope/vim-fugitive'
@@ -50,17 +49,12 @@ endif
 if has('python3')
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 endif
-Plug 'mattn/emmet-vim'
-
-"Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" Utils
-Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
 
 " Automatically install missing plugins on startup
 autocmd VimEnter *
-  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \ if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall --sync | q
   \| endif
