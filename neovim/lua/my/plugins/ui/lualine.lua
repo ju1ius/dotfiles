@@ -41,6 +41,7 @@ local function make_macro_component()
   return {
     'macro-recording',
     fmt = format,
+    cond = function() return vim.o.cmdheight == 0 end,
   }
 end
 

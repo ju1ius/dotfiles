@@ -41,7 +41,7 @@ if not vim.g.vscode then
 end
 
 -------------------- GUI
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 -- popup menu height
 vim.opt.pumheight = 10
 -- vim.opt.guioptions = 'aegimrLt'
