@@ -25,9 +25,6 @@ return {
               desc = 'Git stage current hunk',
               topic = 'git',
             })
-            -- mapV', '<leader>hs', ':Gitsigns stage_hunk<CR>', {
-            --   desc = 'Git stage current hunk',
-            -- })
             map('n', '<leader>ghu', '<cmd>Gitsigns undo_stage_hunk<CR>', {
               buffer = bufno,
               topic = 'git',
@@ -38,9 +35,6 @@ return {
               desc = 'Git reset hunk',
               topic = 'git',
             })
-            -- mapV', '<leader>hr', ':Gitsigns reset_hunk<CR>', {
-            --   desc = 'Git reset hunk',
-            -- })
             map('n', '<leader>ghR', '<cmd>Gitsigns reset_buffer<CR>', {
               buffer = bufno,
               topic = 'git',

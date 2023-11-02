@@ -1,3 +1,6 @@
+-- Stuff to check:
+-- https://github.com/ziontee113/syntax-tree-surfer
+
 return {
   {
     -- https://github.com/echasnovski/mini.pairs
