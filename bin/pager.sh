@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 exec col -bx | vim \
   -c "runtime! macros/less.vim" \

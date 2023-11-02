@@ -1,15 +1,10 @@
-#!/usr/bin/env bash
-
+#!/bin/sh
 set -e
 
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
+__ROOT__="$(git rev-parse --show-toplevel)"
+cd "${__ROOT__}" || exit 1
 
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+git -C dotbot submodule sync --quiet --recursive
+git submodule update --init --recursive dotbot
 
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
-
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+./dotbot/bin/dotbot -d . -c install.conf.yaml "$@"
