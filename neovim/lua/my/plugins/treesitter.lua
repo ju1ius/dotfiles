@@ -5,7 +5,7 @@ return {
     vscode = true,
     firenvim = true,
     dependencies = {
-      {'nvim-treesitter/nvim-treesitter-textobjects'},
+      { 'nvim-treesitter/nvim-treesitter-textobjects' },
       {
         -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring,
         'JoosepAlviste/nvim-ts-context-commentstring',
@@ -15,22 +15,23 @@ return {
       {
         -- https://github.com/nvim-treesitter/nvim-treesitter-context
         'nvim-treesitter/nvim-treesitter-context',
-        opts = { mode = "cursor", max_lines = 3 },
+        opts = { mode = 'cursor', max_lines = 3 },
       },
     },
     build = ':TSUpdate',
-    event = {'VeryLazy'},
+    event = { 'VeryLazy' },
     config = function(plugin, opts)
       local configs = require('nvim-treesitter.configs')
-      local K = require("my.utils.keys")
+      local K = require('my.utils.keys')
 
-      K.map({'n'}, "<leader>v", nil, {
-        topic = "select",
-        desc = [[Initiate incremental selection, then use +/- to increment/decrement or s to select scope.]]
+      K.map({ 'n' }, '<leader>v', nil, {
+        topic = 'select',
+        desc = [[Initiate incremental selection, then use +/- to increment/decrement or s to select scope.]],
       })
 
       configs.setup({
         -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+        -- stylua: ignore start
         ensure_installed = {
           'bash', 'c', 'cmake', 'comment', 'cpp',
           'dockerfile', 'glsl', 'go', 'graphql',
@@ -41,28 +42,29 @@ return {
           'scss', 'supercollider', 'svelte', 'toml', 'tsx', 'typescript',
           'vim', 'vue', 'yaml', 'zig',
         },
+        -- stylua: ignore end
         -- install languages synchronously (only applied to `ensure_installed`)
         sync_install = false,
         -- List of parsers to ignore installing
-        ignore_install = {''},
+        ignore_install = { '' },
         highlight = {
           -- false will disable the whole extension
           enable = not vim.g.vscode,
           -- list of language that will be disabled
-          disable = {''},
+          disable = { '' },
           additional_vim_regex_highlighting = false,
         },
         indent = {
           enable = true,
-          disable = {'yaml'},
+          disable = { 'yaml' },
         },
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "<leader>v",
-            node_incremental = "+",
-            scope_incremental = "s",
-            node_decremental = "-",
+            init_selection = '<leader>v',
+            node_incremental = '+',
+            scope_incremental = 's',
+            node_decremental = '-',
           },
         },
         autopairs = {
@@ -90,10 +92,10 @@ return {
 
       -- set foldmethod to expression
       vim.opt.foldmethod = 'expr'
-      vim.opt.foldexpr = [[nvim_treesitter#foldexpr()]]
       -- start with folds open by default
-      vim.opt.foldlevel= 99
-
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     end,
-  }
+  },
 }

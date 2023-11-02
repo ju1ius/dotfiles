@@ -1,104 +1,87 @@
-local K = require('my.utils.keys')
+local Methods = vim.lsp.protocol.Methods
 
-local function set_buf_keymaps(bufnr)
-  K.map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Go to declaration',
-  })
-  K.map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Go to definition',
-  })
-  K.map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {
+local map = require('my.utils.keys').map
+
+local M = {}
+
+---LspAttach handler for keymaps registration
+---@param client lsp.Client
+---@param bufnr integer
+function M.attach(client, bufnr)
+  map('n', 'K', vim.lsp.buf.hover, {
     buffer = bufnr,
     topic = 'lsp',
     desc = 'Show popup',
   })
-  K.map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {
+  map('n', 'gD', vim.lsp.buf.declaration, {
+    buffer = bufnr,
+    topic = 'lsp',
+    desc = 'Go to declaration',
+  })
+  map('n', 'gd', vim.lsp.buf.definition, {
+    buffer = bufnr,
+    topic = 'lsp',
+    desc = 'Go to definition',
+  })
+  map('n', 'gi', vim.lsp.buf.implementation, {
     buffer = bufnr,
     topic = 'lsp',
     desc = 'Go to implementations',
   })
-  K.map({'n', 'i'}, '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Show signature',
-  })
-  K.map('n', '<leader>lrn', '<cmd>lua vim.lsp.buf.rename()<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Rename symbol',
-  })
-  K.map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {
+  map('n', 'gr', vim.lsp.buf.references, {
     buffer = bufnr,
     topic = 'lsp',
     desc = 'Go to references',
   })
-  K.map('n', '<leader>lca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Code action',
-  })
-  K.map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({border = "rounded"})<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Go to next diagnostic',
-  })
-  K.map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({border = "rounded"})<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Go to previous diagnostic',
-  })
-  K.map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', {
+  map('n', 'gl', vim.diagnostic.open_float, {
     buffer = bufnr,
     topic = 'lsp',
     desc = 'Show line diagnostics',
   })
-  K.map('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', {
+  map('n', ']d', vim.diagnostic.goto_next, {
+    buffer = bufnr,
+    topic = 'lsp',
+    desc = 'Go to next diagnostic',
+  })
+  map('n', '[d', vim.diagnostic.goto_prev, {
+    buffer = bufnr,
+    topic = 'lsp',
+    desc = 'Go to previous diagnostic',
+  })
+  map('n', '<leader>lq', vim.diagnostic.setloclist, {
     buffer = bufnr,
     topic = 'lsp',
     desc = 'Show diagnostics loclist',
   })
-  K.map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', {
-    buffer = bufnr,
-    topic = 'lsp',
-    desc = 'Format document',
-  })
 
-  vim.api.nvim_buf_create_user_command(
-    bufnr,
-    'Format',
-    function()
-      vim.lsp.buf.format({buffer = bufnr})
-    end,
-    {desc = '[lsp] Format document'}
-  )
-  vim.api.nvim_buf_create_user_command(
-    bufnr,
-    'LspDebug',
-    function()
-      require('my.utils.log').dump(vim.lsp.get_clients({buffer = bufnr}))
-    end,
-    { desc = '[lsp] Dump LSP client configuration' }
-  )
+  if client.supports_method(Methods.textDocument_codeAction, { bufnr = bufnr }) then
+    map('n', '<leader>lca', vim.lsp.buf.code_action, {
+      buffer = bufnr,
+      topic = 'lsp',
+      desc = 'Code action',
+    })
+  end
+  if client.supports_method(Methods.textDocument_rename, { bufnr = bufnr }) then
+    map('n', '<leader>lrn', vim.lsp.buf.rename, {
+      buffer = bufnr,
+      topic = 'lsp',
+      desc = 'Rename symbol',
+    })
+  end
+  if client.supports_method(Methods.textDocument_signatureHelp, { bufnr = bufnr }) then
+    map({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, {
+      buffer = bufnr,
+      topic = 'lsp',
+      desc = 'Show signature',
+    })
+  end
+  if client.supports_method(Methods.textDocument_formatting, { bufnr = bufnr }) then
+    map('n', '<leader>lf', vim.lsp.buf.format, {
+      buffer = bufnr,
+      topic = 'lsp',
+      desc = 'Format document',
+    })
+  end
 end
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.server_capabilities.completionProvider then
-      -- vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-      -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    end
-    if client.server_capabilities.definitionProvider then
-      -- vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-      -- vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
-    end
-
-    set_buf_keymaps(bufnr)
-  end
-})
+return M

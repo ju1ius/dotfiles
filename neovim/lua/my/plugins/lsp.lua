@@ -1,5 +1,6 @@
 return {
   {
+    -- https://github.com/neovim/nvim-lspconfig
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'folke/neoconf.nvim', cmd = 'Neoconf', config = false, dependencies = { 'nvim-lspconfig' } },
@@ -27,6 +28,7 @@ return {
     end,
   },
   {
+    -- https://github.com/folke/trouble.nvim
     'folke/trouble.nvim',
     dependencies = {
       { 'kyazdani42/nvim-web-devicons' },
@@ -40,11 +42,11 @@ return {
       })
     end,
     config = function(plugin, opts)
-      -- https://github.com/folke/trouble.nvim#%EF%B8%8F-configuration
       require('trouble').setup({})
     end,
   },
   {
+    -- https://github.com/j-hui/fidget.nvim
     'j-hui/fidget.nvim',
   },
 }

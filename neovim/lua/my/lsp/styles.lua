@@ -1,3 +1,4 @@
+local Methods = vim.lsp.protocol.Methods
 
 -- TODO: backfill this to template
 local signs = {
@@ -30,11 +31,11 @@ vim.diagnostic.config({
   },
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+vim.lsp.handlers[Methods.textDocument_hover] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = 'rounded',
 })
 
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+vim.lsp.handlers[Methods.textDocument_signatureHelp] = vim.lsp.with(vim.lsp.handlers.signature_help, {
   border = 'rounded',
 })
 
