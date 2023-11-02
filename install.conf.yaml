@@ -36,5 +36,4 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [cp -f terminator/config ~/.config/terminator/config, Copying Terminator config file]
 
