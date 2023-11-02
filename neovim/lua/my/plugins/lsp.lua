@@ -48,5 +48,8 @@ return {
   {
     -- https://github.com/j-hui/fidget.nvim
     'j-hui/fidget.nvim',
+    tag = 'legacy',
+    event = 'LspAttach',
+    opts = {},
   },
 }
