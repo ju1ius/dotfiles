@@ -33,7 +33,12 @@ util.default_config = vim.tbl_deep_extend('force', util.default_config, {
 
 require('mason').setup()
 local mason_lspconfig = require('mason-lspconfig')
-mason_lspconfig.setup({})
+mason_lspconfig.setup({
+  ensure_installed = {
+    'lua_ls',
+    'bashls',
+  },
+})
 mason_lspconfig.setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
@@ -77,7 +82,9 @@ end
 local register_capability = vim.lsp.handlers[Methods.client_registerCapability]
 vim.lsp.handlers[Methods.client_registerCapability] = function(err, res, ctx)
   local client = vim.lsp.get_client_by_id(ctx.client_id)
-  if not client then return end
+  if not client then
+    return
+  end
   on_attach(client, vim.api.nvim_get_current_buf())
   return register_capability(err, res, ctx)
 end
@@ -86,8 +93,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'Configure LSP client',
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if not client then return end
+    if not client then
+      return
+    end
     on_attach(client, args.buf)
   end,
 })
-

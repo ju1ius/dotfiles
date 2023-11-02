@@ -26,11 +26,9 @@ alias dcd="docker compose down"
 alias dcl="docker compose logs"
 
 # aliases for the kitty terminal emulator
-if [[ "${TERM}" = 'xterm-kitty' ]];
-then
+if [[ "${TERM}" = 'xterm-kitty' ]]; then
   alias kitcat="kitty +kitten icat"
   alias kiff="kitty +kitten diff"
   # https://sw.kovidgoyal.net/kitty/faq.html#i-get-errors-about-the-terminal-being-unknown-or-opening-the-terminal-failing-when-sshing-into-a-different-computer
   # alias ssh="kitty +kitten ssh"
 fi
-
