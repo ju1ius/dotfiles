@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
+#
+# see: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+notARepository: 'quit'
+os:
+  editPreset: nvim
+gui:
+  nerdFontsVersion: '3'
+  showBottomLine: false
+    # colors matching kitty theme
+  theme:
+    inactiveBorderColor:
+      - '#3e4452'
+    activeBorderColor:
+      - white
+      - bold
+    unstagedChangesColor:
+      - yellow
+    selectedLineBgColor:
+      - '#3e4452'
+      - bold
+    selectedRangeBgColor:
+      - reverse
+      - bold

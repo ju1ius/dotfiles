@@ -28,6 +28,7 @@
     ~/.bash_profile: bash/bash_profile
     ~/.bashrc: bash/bashrc
     ~/.config/git/config: git/config
+    ~/.config/lazygit/config.yml: lazygit/config.yml
     ~/.tmux.conf: tmux/tmux.conf
     ~/.editorconfig: .editorconfig
     ~/.vim: vim
