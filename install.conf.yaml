@@ -1,3 +1,5 @@
+# https://github.com/anishathalye/dotbot#configuration
+
 - defaults:
     link:
       create: true
@@ -33,6 +35,7 @@
     ~/.config/VSCodium/User/settings.json: vscode/settings.json
     ~/.npmrc: node/npmrc
     ~/.config/kitty: kitty
+    ~/.config/bat: bat
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
