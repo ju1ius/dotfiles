@@ -1,0 +1,29 @@
+# vim: ft=gitconfig
+# Global per-user git configuration.
+# You can override or extend it by editing `$HOME/.gitconfig`.
+
+[core]
+  editor = nvim
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[rebase]
+	autostash = true
+[rerere]
+	enabled = true
+[color]
+	ui = true
+
+[diff]
+  tool = nvimdiff
+[difftool]
+  prompt = false
+[merge]
+  tool = nvimdiff2
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
