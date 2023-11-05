@@ -4,7 +4,6 @@ set -e
 __ROOT__="$(git rev-parse --show-toplevel)"
 cd "${__ROOT__}" || exit 1
 
-git -C dotbot submodule sync --quiet --recursive
-git submodule update --init --recursive dotbot
+git submodule update --init --recursive
 
-./dotbot/bin/dotbot -d . -c install.conf.yaml "$@"
+./deps/dotbot/bin/dotbot -d . -c install.conf.yaml "$@"

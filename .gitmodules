@@ -1,4 +1,7 @@
 [submodule "dotbot"]
-	path = dotbot
+	path = deps/dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "complete-alias"]
+	path = deps/complete-alias
+	url = https://github.com/cykerway/complete-alias.git
