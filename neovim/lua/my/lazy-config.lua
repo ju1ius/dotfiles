@@ -17,7 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   spec = {
-    {import = 'my.plugins'},
+    { import = 'my.plugins' },
   },
   defaults = {
     cond = function(plugin, opts)
@@ -36,6 +36,9 @@ require('lazy').setup({
   },
   change_detection = {
     enabled = not vim.g.vscode,
+  },
+  install = {
+    colorscheme = { 'onedark', 'habamax' },
   },
 })
 

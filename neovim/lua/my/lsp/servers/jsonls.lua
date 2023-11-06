@@ -9,113 +9,113 @@ local schemas = {
   },
   {
     description = 'Vimspector debug adapter configuration file.',
-    fileMatch = {'.gadgets.json', '.gadgets.d/*.json'},
-    url = 'https://puremourning.github.io/vimspector/schema/gadgets.schema.json'
+    fileMatch = { '.gadgets.json', '.gadgets.d/*.json' },
+    url = 'https://puremourning.github.io/vimspector/schema/gadgets.schema.json',
   },
   {
-    description = "NPM configuration file",
+    description = 'NPM configuration file',
     fileMatch = {
-      "package.json",
+      'package.json',
     },
-    url = "https://json.schemastore.org/package.json",
+    url = 'https://json.schemastore.org/package.json',
   },
   {
-    description = "TypeScript compiler configuration file",
+    description = 'TypeScript compiler configuration file',
     fileMatch = {
-      "tsconfig.json",
-      "tsconfig.*.json",
+      'tsconfig.json',
+      'tsconfig.*.json',
     },
-    url = "https://json.schemastore.org/tsconfig.json",
+    url = 'https://json.schemastore.org/tsconfig.json',
   },
   {
-    description = "Composer configuration file",
+    description = 'Composer configuration file',
     fileMatch = {
-      "composer.json",
+      'composer.json',
     },
-    url = "https://raw.githubusercontent.com/composer/composer/master/res/composer-schema.json",
+    url = 'https://raw.githubusercontent.com/composer/composer/master/res/composer-schema.json',
   },
   {
-    description = "Babel configuration",
+    description = 'Babel configuration',
     fileMatch = {
-      ".babelrc.json",
-      ".babelrc",
-      "babel.config.json",
+      '.babelrc.json',
+      '.babelrc',
+      'babel.config.json',
     },
-    url = "https://json.schemastore.org/babelrc.json",
+    url = 'https://json.schemastore.org/babelrc.json',
   },
   {
-    description = "ESLint config",
+    description = 'ESLint config',
     fileMatch = {
-      ".eslintrc.json",
-      ".eslintrc",
+      '.eslintrc.json',
+      '.eslintrc',
     },
-    url = "https://json.schemastore.org/eslintrc.json",
+    url = 'https://json.schemastore.org/eslintrc.json',
   },
   {
-    description = "Lerna config",
-    fileMatch = { "lerna.json" },
-    url = "https://json.schemastore.org/lerna.json",
+    description = 'Lerna config',
+    fileMatch = { 'lerna.json' },
+    url = 'https://json.schemastore.org/lerna.json',
   },
   {
-    description = "Prettier config",
+    description = 'Prettier config',
     fileMatch = {
-      ".prettierrc",
-      ".prettierrc.json",
-      "prettier.config.json",
+      '.prettierrc',
+      '.prettierrc.json',
+      'prettier.config.json',
     },
-    url = "https://json.schemastore.org/prettierrc",
+    url = 'https://json.schemastore.org/prettierrc',
   },
   {
-    description = "Stylelint config",
+    description = 'Stylelint config',
     fileMatch = {
-      ".stylelintrc",
-      ".stylelintrc.json",
-      "stylelint.config.json",
+      '.stylelintrc',
+      '.stylelintrc.json',
+      'stylelint.config.json',
     },
-    url = "https://json.schemastore.org/stylelintrc",
+    url = 'https://json.schemastore.org/stylelintrc',
   },
   {
-    description = "Schema for CMake Presets",
+    description = 'Schema for CMake Presets',
     fileMatch = {
-      "CMakePresets.json",
-      "CMakeUserPresets.json",
+      'CMakePresets.json',
+      'CMakeUserPresets.json',
     },
-    url = "https://raw.githubusercontent.com/Kitware/CMake/master/Help/manual/presets/schema.json",
+    url = 'https://raw.githubusercontent.com/Kitware/CMake/master/Help/manual/presets/schema.json',
   },
   {
-    description = "LLVM compilation database",
+    description = 'LLVM compilation database',
     fileMatch = {
-      "compile_commands.json",
+      'compile_commands.json',
     },
-    url = "https://json.schemastore.org/compile-commands.json",
+    url = 'https://json.schemastore.org/compile-commands.json',
   },
   {
-    description = "Config file for Command Task Runner",
+    description = 'Config file for Command Task Runner',
     fileMatch = {
-      "commands.json",
+      'commands.json',
     },
-    url = "https://json.schemastore.org/commands.json",
+    url = 'https://json.schemastore.org/commands.json',
   },
   {
-    description = "Json schema for properties json file for a GitHub Workflow template",
+    description = 'Json schema for properties json file for a GitHub Workflow template',
     fileMatch = {
-      ".github/workflow-templates/**.properties.json",
+      '.github/workflow-templates/**.properties.json',
     },
-    url = "https://json.schemastore.org/github-workflow-template-properties.json",
+    url = 'https://json.schemastore.org/github-workflow-template-properties.json',
   },
   {
-    description = "Packer template JSON configuration",
+    description = 'Packer template JSON configuration',
     fileMatch = {
-      "packer.json",
+      'packer.json',
     },
-    url = "https://json.schemastore.org/packer.json",
+    url = 'https://json.schemastore.org/packer.json',
   },
   {
-    description = "JSON schema for Visual Studio component configuration files",
+    description = 'JSON schema for Visual Studio component configuration files',
     fileMatch = {
-      "*.vsconfig",
+      '*.vsconfig',
     },
-    url = "https://json.schemastore.org/vsconfig.json",
+    url = 'https://json.schemastore.org/vsconfig.json',
   },
 }
 
@@ -129,7 +129,7 @@ local opts = {
     commands = {
       Format = {
         function()
-          vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line('$'), 0})
+          vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line('$'), 0 })
         end,
       },
     },

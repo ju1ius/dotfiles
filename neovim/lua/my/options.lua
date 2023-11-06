@@ -30,7 +30,7 @@ vim.opt.softtabstop = 2
 -- change the number of space characters inserted for indentation
 vim.opt.shiftwidth = 2
 vim.opt.smartindent = true
-vim.opt.listchars = {eol = '↴'}
+vim.opt.listchars = { eol = '↴' }
 
 -------------------- Backups
 vim.opt.backup = false

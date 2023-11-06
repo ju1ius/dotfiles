@@ -15,14 +15,18 @@ local function repr_rhs(mapping)
     -- try to get a repr from vim keymap
     for _, mode in ipairs(mapping.modes) do
       local rhs = vim.fn.maparg(mapping.lhs, mode)
-      if rhs ~= '' then return rhs end
+      if rhs ~= '' then
+        return rhs
+      end
     end
     return '<virtual>'
   end
   if K.is_function(mapping) then
     for _, mode in ipairs(mapping.modes) do
       local rhs = vim.fn.maparg(mapping.lhs, mode)
-      if rhs ~= '' then return rhs end
+      if rhs ~= '' then
+        return rhs
+      end
     end
     return '<Lua: unknown>'
   end
@@ -75,12 +79,7 @@ local function get_preview(entry)
     if entry.opts.expr then
       prefix = prefix .. ' <expr>'
     end
-    local m = string.format(
-      '%s %s %s',
-      prefix,
-      entry.lhs,
-      repr_rhs(entry)
-    )
+    local m = string.format('%s %s %s', prefix, entry.lhs, repr_rhs(entry))
     table.insert(lines, m)
   end
   return lines
@@ -124,7 +123,7 @@ local function pick(opts)
           display = display_entry,
           ordinal = get_ordinal(entry),
         }
-      end
+      end,
     }),
     sorter = conf.generic_sorter(opts),
     previewer = previewers.new_buffer_previewer({
@@ -132,7 +131,7 @@ local function pick(opts)
       --   require('telescope.previewers.utils').highlighter(self.state.bufnr, 'vim')
       -- end,
       define_preview = function(self, entry, status)
-        vim.api.nvim_set_option_value('filetype', 'vim', {buf = self.state.bufnr})
+        vim.api.nvim_set_option_value('filetype', 'vim', { buf = self.state.bufnr })
         local lines = get_preview(entry.value)
         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
       end,
@@ -151,7 +150,7 @@ local function pick(opts)
         end
       end)
       return true
-    end
+    end,
   })
   p:find()
 end

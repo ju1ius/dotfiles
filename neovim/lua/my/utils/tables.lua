@@ -31,7 +31,9 @@ end
 
 local function count(t, iter)
   local n = 0
-  for _, _ in iter(t) do n = n + 1 end
+  for _, _ in iter(t) do
+    n = n + 1
+  end
   return n
 end
 

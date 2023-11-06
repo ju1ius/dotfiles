@@ -13,8 +13,8 @@ return {
         localSettings = {
           ['.*'] = {
             takeover = 'never',
-          }
-        }
+          },
+        },
       }
     end,
   },

@@ -13,16 +13,18 @@ end
 -- Setting cmdheight=0 hides the macro recording notification,
 -- so we display it in the statusbar instead
 local function make_macro_component()
-  local timer = require("my.utils.timer")
+  local timer = require('my.utils.timer')
   local lualine = require('lualine')
   local function format()
     local register = vim.fn.reg_recording()
-    if register == '' then return end
+    if register == '' then
+      return
+    end
     return '@' .. register
   end
 
   local function refresh()
-    lualine.refresh{place = {'statusline'}}
+    lualine.refresh({ place = { 'statusline' } })
   end
 
   local augroup = vim.api.nvim_create_augroup('lualine_macro_component', {})
@@ -41,7 +43,9 @@ local function make_macro_component()
   return {
     'macro-recording',
     fmt = format,
-    cond = function() return vim.o.cmdheight == 0 end,
+    cond = function()
+      return vim.o.cmdheight == 0
+    end,
   }
 end
 
@@ -54,16 +58,16 @@ return function()
       },
     },
     sections = {
-      lualine_a = {'mode', make_macro_component()},
-      lualine_b = {'branch', 'diff', 'diagnostics'},
-      lualine_c = {'filename'},
+      lualine_a = { 'mode', make_macro_component() },
+      lualine_b = { 'branch', 'diff', 'diagnostics' },
+      lualine_c = { 'filename' },
       lualine_x = {
-        {'encoding', cond = not_utf8},
-        {'fileformat', cond = format_is_not_unix},
+        { 'encoding', cond = not_utf8 },
+        { 'fileformat', cond = format_is_not_unix },
         'filetype',
       },
-      lualine_y = {progress},
-      lualine_z = {'location'}
+      lualine_y = { progress },
+      lualine_z = { 'location' },
     },
   })
 end

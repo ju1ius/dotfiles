@@ -17,15 +17,15 @@ function M.write(message)
 end
 
 function M.info(msg, name)
-  vim.notify(msg, vim.log.levels.INFO, {title = name})
+  vim.notify(msg, vim.log.levels.INFO, { title = name })
 end
 
 function M.warn(msg, name)
-  vim.notify(msg, vim.log.levels.WARN, {title = name})
+  vim.notify(msg, vim.log.levels.WARN, { title = name })
 end
 
 function M.error(msg, name)
-  vim.notify(msg, vim.log.levels.ERROR, {title = name})
+  vim.notify(msg, vim.log.levels.ERROR, { title = name })
 end
 
 return M

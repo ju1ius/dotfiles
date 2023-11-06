@@ -9,7 +9,7 @@ return {
     firenvim = true,
     event = 'VeryLazy',
     opts = {
-      modes = {insert = true, command = false, terminal = true},
+      modes = { insert = true, command = false, terminal = true },
     },
   },
   {
@@ -50,9 +50,9 @@ return {
           highlight = 'Whitespace',
         },
         exclude = {
-          buftypes = {'terminal', 'no_file'},
+          buftypes = { 'terminal', 'no_file' },
           filetypes = {
-            "help",
+            'help',
             'startify',
             'dashboard',
             'packer',

@@ -1,11 +1,11 @@
 local map = require('my.utils.keys').map
-local term_opts = {silent = true}
+local term_opts = { silent = true }
 
 -- removes help message when pressing <C-c> in normal mode
-vim.api.nvim_set_keymap('n', '<C-c>', '<C-c>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-c>', '<C-c>', { noremap = true, silent = true })
 
 -- use space as leader key
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -19,14 +19,16 @@ vim.g.maplocalleader = ' '
 
 -- Normal --
 
-map('n', '<Enter>', 'o<ESC>k', {
+-- skip read-only buffers to preserve default behaviour in quickfix.
+map('n', '<Enter>', [[&modifiable ? 'o<ESC>k' : '<CR>']], {
+  expr = true,
   desc = 'Insert blank line after current',
 })
 map('n', '<S-Enter>', 'o<ESC>j', {
   desc = 'Insert blank line before current',
 })
 
-map({'n', 'v', 'o'}, '<leader>y', '"+y', {
+map({ 'n', 'v', 'o' }, '<leader>y', '"+y', {
   desc = 'Yank to clipboard',
 })
 map('', '<leader>yy', '"+yy', {
@@ -39,7 +41,7 @@ map('', '<leader>P', '"+P', {
   desc = 'Paste from clipboard, insert before',
 })
 
-map('n', 'J', 'mzJ``z', {
+map('n', 'J', 'mzJ`z', {
   desc = 'Joins lines. Same as J but keeps the cursor at its original position.',
 })
 
@@ -77,7 +79,6 @@ map('n', '<C-Right>', ':vertical resize +2<CR>', {
   desc = 'Increase window width',
 })
 
-
 -- Visual --
 -- Stay in indent mode
 map('v', '<', '<gv', {
@@ -99,13 +100,12 @@ map('v', 'p', '"_dP', {
   desc = 'Paste without overriding the register.',
 })
 
-
 -- Terminal --
 -- window navigation
-map('t', '<C-h>', '<C-\\><C-N><C-w>h', term_opts)
-map('t', '<C-j>', '<C-\\><C-N><C-w>j', term_opts)
-map('t', '<C-k>', '<C-\\><C-N><C-w>k', term_opts)
-map('t', '<C-l>', '<C-\\><C-N><C-w>l', term_opts)
+map('t', '<C-h>', [[<C-\><C-N><C-w>h]], term_opts)
+map('t', '<C-j>', [[<C-\><C-N><C-w>j]], term_opts)
+map('t', '<C-k>', [[<C-\><C-N><C-w>k]], term_opts)
+map('t', '<C-l>', [[<C-\><C-N><C-w>l]], term_opts)
 
 -- Help --
 
@@ -125,7 +125,7 @@ vim.api.nvim_create_autocmd('FileType', {
       topics = 'help',
       desc = '<enter> to follow help tags',
     })
-  end
+  end,
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = help_group,
@@ -136,7 +136,7 @@ vim.api.nvim_create_autocmd('FileType', {
       topics = 'help',
       desc = '<backspace> to navigate back',
     })
-  end
+  end,
 })
 vim.api.nvim_create_autocmd('FileType', {
   group = help_group,
@@ -147,7 +147,7 @@ vim.api.nvim_create_autocmd('FileType', {
       topics = 'help',
       desc = '<q> to quit help',
     })
-  end
+  end,
 })
 
 -- Plugins -
@@ -164,3 +164,9 @@ if vim.g.vscode then
     vscode.notify('workbench.action.findInFiles')
   end)
 end
+
+vim.api.nvim_create_user_command('BigFile', function(_)
+  vim.cmd('LspStop')
+  vim.cmd('IBLDisable')
+  vim.b[0].format_on_save = false
+end, { desc = 'Big file mode on' })

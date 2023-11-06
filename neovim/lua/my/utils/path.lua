@@ -9,4 +9,3 @@ function M.config(path)
 end
 
 return M
-
