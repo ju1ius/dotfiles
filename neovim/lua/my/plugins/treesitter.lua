@@ -7,12 +7,6 @@ return {
     dependencies = {
       { 'nvim-treesitter/nvim-treesitter-textobjects' },
       {
-        -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring,
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        lazy = true,
-        opts = { enable_autocmd = false },
-      },
-      {
         -- https://github.com/nvim-treesitter/nvim-treesitter-context
         'nvim-treesitter/nvim-treesitter-context',
         opts = { mode = 'cursor', max_lines = 3 },
@@ -96,5 +90,10 @@ return {
       vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
       vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     end,
+  },
+  {
+    -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring,
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    opts = { enable_autocmd = false },
   },
 }
