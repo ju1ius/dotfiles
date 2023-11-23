@@ -1,9 +1,9 @@
 # https://github.com/anishathalye/dotbot#configuration
 
 - defaults:
-    link:
-      create: true
-      relink: true
+  link:
+    create: true
+    relink: true
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
@@ -18,28 +18,28 @@
   - ~/.local/share/vim/backup
 
 - link:
-    ~/.dotfiles: ''
-    ~/bin/:
-      glob: true
-      path: bin/*
-    ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
-    ~/.config/fontconfig/conf.d/:
-      glob: true
-      path: fontconfig/*
-    ~/.profile: profile
-    ~/.xsessionrc: xsessionrc
-    ~/.bash_profile: bash/bash_profile
-    ~/.bashrc: bash/bashrc
-    ~/.bash_completion: bash/completion.sh
-    ~/.config/git/config: git/config
-    ~/.config/lazygit/config.yml: lazygit/config.yml
-    ~/.tmux.conf: tmux/tmux.conf
-    ~/.editorconfig: .editorconfig
-    ~/.vim: vim
-    ~/.vimrc: vim/init.vim
-    ~/.config/nvim: neovim
-    ~/.config/VSCodium/User/settings.json: vscode/settings.json
-    ~/.npmrc: node/npmrc
-    ~/.config/kitty: kitty
-    ~/.config/bat: bat
-
+  ~/.dotfiles: ''
+  ~/bin/:
+    glob: true
+    path: bin/*
+  ~/.config/user-dirs.dirs: xdg/user-dirs.dirs
+  ~/.config/fontconfig/conf.d/:
+    glob: true
+    path: fontconfig/*
+  ~/.profile: profile
+  ~/.xsessionrc: xsessionrc
+  ~/.bash_profile: bash/bash_profile
+  ~/.bashrc: bash/bashrc
+  ~/.bash_completion: bash/completion.sh
+  ~/.config/git/config: git/config
+  ~/.config/lazygit/config.yml: lazygit/config.yml
+  ~/.tmux.conf: tmux/tmux.conf
+  ~/.editorconfig: .editorconfig
+  ~/.vim: vim
+  ~/.vimrc: vim/init.vim
+  ~/.config/nvim: neovim
+  ~/.config/VSCodium/User/settings.json: vscode/settings.json
+  ~/.npmrc: node/npmrc
+  ~/.config/kitty: kitty
+  ~/.config/bat: bat
+  ~/.config/xfce4/terminal/colorschemes: xfce4/terminal/colorschemes
