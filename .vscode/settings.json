@@ -3,5 +3,6 @@
   "python.analysis.extraPaths": [
     "/usr/lib/kitty"
   ],
-  "Lua.codeLens.enable": true
+  "Lua.codeLens.enable": true,
+  "stylua.targetReleaseVersion": "latest"
 }
