@@ -29,7 +29,7 @@ return {
     -- https://github.com/folke/trouble.nvim
     'folke/trouble.nvim',
     dependencies = {
-      { 'kyazdani42/nvim-web-devicons' },
+      { 'nvim-tree/nvim-web-devicons' },
     },
     cmd = { 'TroubleToggle' },
     init = function()
