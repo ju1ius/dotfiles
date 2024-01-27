@@ -137,4 +137,39 @@ return {
       vim.g.undotree_WindowLayout = 3
     end,
   },
+  {
+    "rcarriga/nvim-notify",
+    keys = {
+      {
+        "<leader>dn",
+        desc = "Dismiss all Notifications",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+      },
+    },
+    opts = {
+      timeout = 5000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+      on_open = function(win)
+        if vim.api.nvim_win_is_valid(win) then
+          vim.api.nvim_win_set_config(win, { zindex = 100, border = "single" })
+        end
+      end,
+    },
+    init = function()
+      vim.notify = require("notify")
+      -- -- when noice is not enabled, install notify on VeryLazy
+      -- if not Util.has("noice.nvim") then
+      --   Util.on_very_lazy(function()
+      --     vim.notify = require("notify")
+      --   end)
+      -- end
+    end,
+  }
 }
