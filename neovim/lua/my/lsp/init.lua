@@ -3,7 +3,8 @@
 
 local Methods = vim.lsp.protocol.Methods
 
-vim.lsp.set_log_level('debug')
+vim.lsp.set_log_level('off')
+-- vim.lsp.set_log_level('debug')
 
 require('my.lsp.styles')
 
