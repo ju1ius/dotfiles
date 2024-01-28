@@ -24,6 +24,24 @@ return {
         desc = 'trigger autocompletion dropdown',
       })
 
+      -- Fixes the caret jumping around when cancelling an unfinished snippet
+      -- see: https://github.com/L3MON4D3/LuaSnip/issues/872
+      vim.api.nvim_create_autocmd('ModeChanged', {
+        desc = 'Cancel the snippet session when leaving insert mode',
+        group = vim.api.nvim_create_augroup('ju1ius/snippets/unlink', { clear = true }),
+        pattern = { 's:n', 'i:*' },
+        callback = function(args)
+          if
+            luasnip.session
+            and luasnip.session.current_nodes[args.buf]
+            and not luasnip.session.jump_active
+            and not luasnip.choice_active()
+          then
+            luasnip.unlink_current()
+          end
+        end,
+      })
+
       --   פּ ﯟ   some other good icons
       local kind_icons = {
         Text = '',
