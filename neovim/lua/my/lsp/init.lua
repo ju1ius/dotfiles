@@ -58,9 +58,7 @@ mason_lspconfig.setup_handlers({
   end,
   -- Next, you can provide a dedicated handler for specific servers.
   -- For example, a handler override for the `rust_analyzer`:
-  -- ['rust_analyzer'] = function()
-  --     require('rust-tools').setup({})
-  -- end
+  ['rust_analyzer'] = function() end,
 })
 
 ---Main LspAttach handler
